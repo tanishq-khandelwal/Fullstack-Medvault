@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MedVault - Upload Document</title>
+    <style>
+      /* Your existing CSS styles */
+      body {
+        background-color: white; /* Blue background */
+        color: black; /* White text */
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+        /* margin-left: 40rem; */
+        margin-top: 100px;
+      }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .logo h1 {
+        font-size: 36px;
+        margin-top: 0;
+      }
+
+      .logo h1:first-child {
+        color: #2284e3; /* Blue color for the first h1 */
+      }
+
+      label {
+        font-size: 18px;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      input[type="text"],
+      input[type="file"],
+      button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #64b5f6; /* Light blue button */
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="text"] {
+        background-color: white; /* Dark blue text fields */
+        color: black;
+        border: 2px solid #64b5f6; /* Light blue border */
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      input[type="text"]:focus {
+        border-color: #1976d2; /* Slightly darker blue border on focus */
+      }
+
+      .file-upload-container {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .file-upload-button {
+        background-color: #1976d2; /* Darker blue button */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .file-upload-button:hover {
+        background-color: #1565c0; /* Slightly darker blue button on hover */
+      }
+
+      .file-upload-label {
+        font-size: 16px;
+        margin-left: 10px;
+      }
+
+      .document-table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 50rem;
+        margin-top: 5em;
+        border: 1px solid;
+        border-collapse: collapse;
+      }
+
+      .document-table thead {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .document-table th,
+      .document-table td {
+        width: 50rem;
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      .document-table th {
+        background-color: #f2f2f2;
+      }
+
+      .document-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .document-table tr:hover {
+        background-color: #ddd;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin-left: 10rem; /* Adjust margin for smaller screens */
+        }
+
+        .document-table {
+          width: 90%; /* Adjust table width for smaller screens */
+          margin-left: 10rem; /* Center-align table */
+          margin-right: auto;
+          margin-top: 50rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <h1 style="color: #2284e3">Med</h1>
+        <h1>Vault</h1>
+      </div>
+      <form
+        id="uploadForm"
+        enctype="multipart/form-data"
+        method="post"
+        action="/api/v1/patient/upload/<%= id %>"
+      >
+        <div>
+          <label for="title">Enter Document Name:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div class="file-upload-container">
+          <label for="thumbnail" class="file-upload-button">Choose File</label>
+          <input
+            type="file"
+            id="thumbnail"
+            name="thumbnail"
+            accept=".jpg,.png,.jpeg"
+            required
+          />
+          <span class="file-upload-label"></span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <input type="checkbox" id="consentCheckbox" required style="margin-right: 5px;"/>
+          <label for="consentCheckbox" style="color: red;font-weight: 300;">I consent to share my details with the hospital</label>
+        </div>
+  
+        <button type="submit">Upload</button>
+      </form>
+
+      <div
+        id="successMessage"
+        class="success-message"
+        style="display: none"
+      ></div>
+    </div>
+
+    <!-- Document Display Section -->
+    <table id="documentTable" class="document-table">
+      <!-- Table header (optional) -->
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Document Link</th>
+        </tr>
+      </thead>
+      <!-- Table body will be populated dynamically -->
+      <tbody></tbody>
+    </table>
+
+    <script>
+      // Function to fetch documents from API and render them
+
+      const consentCheckbox = document.getElementById("consentCheckbox");
+    const uploadButton = document.getElementById("uploadButton");
+
+    // Add event listener to the checkbox
+    consentCheckbox.addEventListener("change", function () {
+      // Enable or disable the upload button based on checkbox state
+      if (this.checked) {
+        uploadButton.disabled = false;
+      } else {
+        uploadButton.disabled = true;
+      }
+    });
+
+
+      const fileUploadInput = document.getElementById("thumbnail");
+      const fileUploadLabel = document.querySelector(".file-upload-label");
+
+      fileUploadInput.addEventListener("change", function () {
+        fileUploadLabel.textContent = this.files[0].name;
+      });
+
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const form = event.target;
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch(form.action, {
+              method: "POST",
+              body: formData,
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              document.getElementById("successMessage").innerText =
+                "Document Uploaded Successfully !!";
+              document.getElementById("successMessage").style.display = "block";
+              form.reset();
+
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000); // 2000 milliseconds = 2 seconds
+            } else {
+              const errorData = await response.json();
+              alert(errorData.error);
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+
+      async function fetchAndRenderDocuments() {
+        try {
+          // const response = await fetch('http://localhost:3000/api/v1/patient/allDocuments/<%= id %>');
+          const response = await fetch(
+            "https://medvault-mt5q.onrender.com/api/v1/patient/allDocuments/<%= id %>"
+          );
+          const data = await response.json();
+
+          if (data.success) {
+            const documents = data.documents;
+            const documentTable = document.getElementById("documentTable");
+
+            // Clear existing content
+            // documentTable.innerHTML = '';
+
+            // Render documents as table rows
+            documents.forEach((doc) => {
+              // Changed variable name from 'document' to 'doc'
+              const row = document.createElement("tr");
+
+              // Create cell for document title
+              const titleCell = document.createElement("td");
+              titleCell.textContent = doc.title; // Updated variable name to 'doc'
+              titleCell.style.fontWeight = "bold"; // Make the title bold
+              titleCell.style.textAlign = "center"; // Center align the title
+              row.appendChild(titleCell);
+
+              // Create cell for document link
+              const linkCell = document.createElement("td");
+              const link = document.createElement("a");
+              link.href = doc.thumbnail.secure_url; // Updated variable name to 'doc'
+              link.textContent = "View Document";
+              link.target = "_blank"; // Open link in new tab
+              linkCell.appendChild(link);
+              row.appendChild(linkCell);
+
+              // Append the row to the table
+              documentTable.appendChild(row);
+            });
+          } else {
+            console.error("Error:", data.message);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      // Call the function when the page loads
+      window.onload = fetchAndRenderDocuments;
+    </script>
+  </body>
+</html>
