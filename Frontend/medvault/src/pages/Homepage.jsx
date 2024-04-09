@@ -4,19 +4,13 @@ import Logo from "../assets/react.svg";
 const HomePage = () => {
   return (
     <Layout>
-      <div className="flex items-center justify-center">
-        {/* Logo */}
+      {/* <div className="flex items-center justify-center">
         <img
           src={Logo}
           alt="Logo"
           className="h-[5rem] w-15 ml-[60rem] image-logo"
         />
-
-        {/* Ignite Learning */}
-        <span className="text-center ml-[2rem] font-bold text-5xl text-white">
-          Ignite Learning
-        </span>
-      </div>
+      </div> */}
 
       <div className="pt-10 flex items-center justify-center mx-16 h-[90vh]">
         <div className="w-[50%] flex flex-col justify-start items-start ml-5">
