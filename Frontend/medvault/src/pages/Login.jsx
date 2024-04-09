@@ -13,11 +13,11 @@ const Login=()=>{
                     <img src={Loginimg} alt="Login Image" />
                 </div>
             
-            <section className="bg-gray-50">
+            <section className="bg-white">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+        <div className="w-full bg-gray-50 rounded-lg drop-shadow-xl md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6  h-[400px] w-[400px] sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+            <h1 className="text-xl font-semibold leading-tight tracking-tight text-[#2286E2] md:text-2xl">
               Sign In
             </h1>
             
@@ -27,7 +27,7 @@ const Login=()=>{
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Your email
+                  Email
                 </label>
                 <input
                   type="email"
@@ -68,7 +68,7 @@ const Login=()=>{
                 >
                   Register
                 </a> */}
-                <Link to="/signup" className="font-medium text-primary-600 hover:underline">Register</Link>
+                <Link to="/signup" className="font-medium text-[#2286E2] hover:underline">Register</Link>
               </p>
             </form>
           </div>

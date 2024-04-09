@@ -6,6 +6,7 @@ import { HiCircleStack } from "react-icons/hi2";
 import image from "../assets/image2.png";
 import image2 from "../assets/image3.png";
 import image3 from "../assets/image.png";
+import homepageimg from "../assets/Homepage.jpg";
 const HomePage = () => {
   return (
     <Layout>
@@ -17,17 +18,25 @@ const HomePage = () => {
         />
       </div> */}
 
-      <div className="pt-10 flex items-center justify-center mx-16 h-[90vh]">
-        <div className="w-[50%] flex flex-col justify-start items-start ml-5">
-          <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl">
-            <span className="text-blue-600">Med</span>Vault
-          </h1>
-          <p className="text-lg md:text-xl lg:text-2xl">
-            A Secure and Accessible Patient Information Platform for Healthcare
-            Professionals
-          </p>
-        </div>
-      </div>
+<div className="pt-10 flex items-center justify-center mx-16 h-[90vh]">
+  <div className="w-full flex justify-between">
+    <div className="w-[50%] flex flex-col justify-start items-start ml-5 mt-[6rem]">
+      <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl">
+        <span className="text-blue-600">Med</span>Vault
+      </h1>
+      <p className="text-lg md:text-xl lg:text-2xl mt-5">
+        A Secure and Accessible Patient Information Platform for Healthcare Professionals
+      </p>
+
+      <button className="btn btn-outline btn-info mt-[4rem]  hover:bg-blue-600">Contact Us</button>
+
+    </div>
+    <div className="h-[35rem] w-[32rem] items-center justify-end ml-[15rem] mr-[5rem]">
+      <img src={homepageimg} alt="homepage img" className="h-[400px] w-[35rem]" />
+    </div>
+  </div>
+</div>
+
 
       {/* About US */}
       <div className="h-[90vh] bg-[#EFF7FF]">
@@ -41,11 +50,7 @@ const HomePage = () => {
         <div className="flex items-center justify-evenly mt-10">
           <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
             <figure className="px-5 pt-5">
-              <img
-                src={image}
-                alt="Shoes"
-                className="rounded-xl"
-              />
+              <img src={image} alt="Shoes" className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
               <h2 className="card-title">Our Mission</h2>
@@ -58,36 +63,27 @@ const HomePage = () => {
 
           <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
             <figure className="px-5 pt-5">
-              <img
-                src={image2}
-                alt="Shoes"
-                className="rounded-xl"
-              />
+              <img src={image2} alt="Shoes" className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
               <h2 className="card-title">Our Vision</h2>
               <p>
-
-              Our Vision is to revolutionize healthcare by providing a
+                Our Vision is to revolutionize healthcare by providing a
                 seamless integrated platform that empowers medical
                 professionals.
-            
               </p>
             </div>
           </div>
 
           <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
             <figure className="px-5 pt-5">
-              <img
-                src={image3}
-                alt="Shoes"
-                className="rounded-xl"
-              />
+              <img src={image3} alt="Shoes" className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
               <h2 className="card-title">Our Commitments</h2>
               <p>
-              Fostering a culture of inclusivity, diversity, and respect for all individuals within our community.
+                Fostering a culture of inclusivity, diversity, and respect for
+                all individuals within our community.
               </p>
             </div>
           </div>
@@ -173,8 +169,6 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-
-        
       </div>
     </Layout>
   );
