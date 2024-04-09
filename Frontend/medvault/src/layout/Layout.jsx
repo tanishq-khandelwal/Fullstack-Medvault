@@ -4,8 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/footer";
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
+
+
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
+  const role = useSelector((state) => state?.auth?.role);
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,9 +29,13 @@ const Layout = ({children}) => {
   };
 
   const handleLogout = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
-    // Dispatch logout action here
+    // // calling logout action
+    // const res = await dispatch(logout());
+
+    // // redirect to home page if true
+    // if (res?.payload?.success) navigate("/");
   };
 
   return (
@@ -65,7 +74,6 @@ const Layout = ({children}) => {
               <a>Contact Us</a>
             </li>
 
-
             {/* Other sidebar items */}
             {!isLoggedIn && (
               <li className="absolute bottom-4 w-full">
@@ -79,11 +87,26 @@ const Layout = ({children}) => {
                 </div>
               </li>
             )}
+
+            {isLoggedIn && (
+              <li className="absolute bottom-4 w-full">
+                <div className="w-full flex items-center justify-center">
+                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white">
+                    <Link to={"/profile"}>Profile</Link>
+                  </button>
+                  <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-red-600 text-white">
+                    <Link to={"/logout"}>Logout</Link>
+                  </button>
+                </div>
+              </li>
+            )}
           </ul>
         </div>
       </div>
+
+
       {children}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

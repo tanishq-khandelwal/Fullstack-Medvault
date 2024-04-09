@@ -5,13 +5,14 @@ import { Provider } from 'react-redux';
 import store from "./Redux/store.js"; // Import your Redux store
 // import Layout from "./layout/Layout.jsx";
 import HomePage from "./pages/Homepage.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
     <Provider store={store}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* Define other routes here */}
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </Provider>
   );
