@@ -2,6 +2,7 @@ import { FiMenu } from "react-icons/fi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Footer from "../components/footer";
 
 const Layout = ({children}) => {
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
@@ -82,6 +83,7 @@ const Layout = ({children}) => {
         </div>
       </div>
       {children}
+      <Footer/>
     </div>
   );
 };

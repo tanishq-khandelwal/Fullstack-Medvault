@@ -1,6 +1,11 @@
 import Layout from "../layout/Layout";
 import Logo from "../assets/react.svg";
-
+import { FaHeartbeat, FaBell } from "react-icons/fa";
+import { PiNotepadFill } from "react-icons/pi";
+import { HiCircleStack } from "react-icons/hi2";
+import image from "../assets/image2.png";
+import image2 from "../assets/image3.png";
+import image3 from "../assets/image.png";
 const HomePage = () => {
   return (
     <Layout>
@@ -24,6 +29,7 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* About US */}
       <div className="h-[90vh] bg-[#EFF7FF]">
         <div className="flex items-center justify-center">
           <p className="mt-10 font-sans font-bold text-5xl text-[#2386E3]">
@@ -34,9 +40,9 @@ const HomePage = () => {
 
         <div className="flex items-center justify-evenly mt-10">
           <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
-            <figure className="px-10 pt-10">
+            <figure className="px-5 pt-5">
               <img
-                src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src={image}
                 alt="Shoes"
                 className="rounded-xl"
               />
@@ -51,9 +57,9 @@ const HomePage = () => {
           </div>
 
           <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
-            <figure className="px-10 pt-10">
+            <figure className="px-5 pt-5">
               <img
-                src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src={image2}
                 alt="Shoes"
                 className="rounded-xl"
               />
@@ -61,16 +67,35 @@ const HomePage = () => {
             <div className="card-body items-center text-center">
               <h2 className="card-title">Our Vision</h2>
               <p>
-                Our Vision is to revolutionize healthcare by providing a
+
+              Our Vision is to revolutionize healthcare by providing a
                 seamless integrated platform that empowers medical
                 professionals.
+            
+              </p>
+            </div>
+          </div>
+
+          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+            <figure className="px-5 pt-5">
+              <img
+                src={image3}
+                alt="Shoes"
+                className="rounded-xl"
+              />
+            </figure>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">Our Commitments</h2>
+              <p>
+              Fostering a culture of inclusivity, diversity, and respect for all individuals within our community.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="h-[90vh] bg-white">
+      {/* Our Services */}
+      <div className="h-[90vh] bg-white mt-10">
         <div className="flex items-center justify-center">
           <p className="mt-10 font-sans font-bold text-5xl text-[#2386E3]">
             Our
@@ -79,41 +104,77 @@ const HomePage = () => {
         </div>
 
         <div className="flex items-center justify-evenly mt-10">
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
             <figure className="px-10 pt-10">
-              <img
-                src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                alt="Shoes"
-                className="rounded-xl"
-              />
+              <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
+                <FaHeartbeat className="h-[42px] w-[40px]" />
+              </div>
             </figure>
             <div className="card-body items-center text-center">
-              <h2 className="card-title">Our Mission</h2>
+              <h2 className="card-title font-sans font-semibold">
+                Smart Appointment Booking
+              </h2>
               <p>
-                Empowering Medical Professional with secure,user-friendly
-                technology to optimize Patient care and privacy compliance.
+                Efficient scheduling solution for seamless appointment bookings
+                and management.
               </p>
             </div>
           </div>
 
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
             <figure className="px-10 pt-10">
-              <img
-                src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                alt="Shoes"
-                className="rounded-xl"
-              />
+              <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
+                <FaBell className="h-[42px] w-[40px]" />
+              </div>
             </figure>
             <div className="card-body items-center text-center">
-              <h2 className="card-title">Our Vision</h2>
+              <h2 className="card-title font-sans font-semibold">
+                Smart Prescription and Reminder
+              </h2>
               <p>
-                Our Vision is to revolutionize healthcare by providing a
-                seamless integrated platform that empowers medical
-                professionals.
+                Manage appointments and medications with Smart Reminders and
+                Smart Online Prescription on MedVault.
+              </p>
+            </div>
+          </div>
+
+          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+            <figure className="px-10 pt-10">
+              <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
+                <PiNotepadFill className="h-[42px] w-[40px]" />
+              </div>
+            </figure>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title font-sans font-semibold">
+                Doctor Dashboard
+              </h2>
+              <p>
+                Oversee patient care with Dashboard on MedVault, offering
+                streamlined access to medical information and tools for
+                decision-making.
+              </p>
+            </div>
+          </div>
+
+          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+            <figure className="px-10 pt-10">
+              <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
+                <HiCircleStack className="h-[42px] w-[40px]" />
+              </div>
+            </figure>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title font-sans font-semibold">
+                Secure Vault
+              </h2>
+              <p>
+                Securely store and manage medical reports and essential data
+                with our Smart Vault feature on MedVault.
               </p>
             </div>
           </div>
         </div>
+
+        
       </div>
     </Layout>
   );
