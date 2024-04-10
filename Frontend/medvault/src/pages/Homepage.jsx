@@ -7,6 +7,9 @@ import image from "../assets/image2.png";
 import image2 from "../assets/image3.png";
 import image3 from "../assets/image.png";
 import homepageimg from "../assets/Homepage2.png";
+import { GiStairsGoal } from "react-icons/gi";
+import { GoGoal } from "react-icons/go";
+import { GiBinoculars } from "react-icons/gi";
 
 const HomePage = () => {
   return (
@@ -62,52 +65,62 @@ const HomePage = () => {
       </div>
 
       {/* About US */}
-      <div className="h-[90vh] bg-[#EFF7FF]">
+      <div className="h-[110vh] bg-[#EFF7FF]">
         <div className="flex items-center justify-center">
           <p className="mt-10 font-sans font-bold text-5xl text-[#2386E3]">
             About
           </p>
           <p className="mt-10 font-sans font-bold text-5xl ml-4">Us</p>
         </div>
-
-        <div className="flex items-center justify-evenly mt-10">
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
-            <figure className="px-5 pt-5">
-              <img src={image} alt="Shoes" className="rounded-xl" />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">Our Mission</h2>
-              <p>
-                Empowering Medical Professional with secure,user-friendly
-                technology to optimize Patient care and privacy compliance.
-              </p>
-            </div>
+        <div className="flex mt-[4rem]">
+          <div className="h-[35rem] w-[28rem] ml-[6rem] mt-[2rem]">
+            <img
+              src={image3}
+              alt="About Us"
+              className="h-[100%] w-[100%] shadow-2xl rounded-tl-[40px]  rounded-br-[40px]"
+            />
           </div>
+          <div>
+            <div className="flex-column items-center justify-around mt-10 ml-[8rem]">
+              <div className="card w-[30rem] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+                <div className="card-body items-center text-center">
+                  <div className="flex items-start">
+                    <div className="justify-start">
+                      {/* <GiStairsGoal className="h-[40px] w-[40px]  " /> */}
+                    </div>
 
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
-            <figure className="px-5 pt-5">
-              <img src={image2} alt="Shoes" className="rounded-xl" />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">Our Vision</h2>
-              <p>
-                Our Vision is to revolutionize healthcare by providing a
-                seamless integrated platform that empowers medical
-                professionals.
-              </p>
-            </div>
-          </div>
+                    <div>
+                      <h2 className="card-title">Our Mission</h2>
+                    </div>
+                  </div>
 
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
-            <figure className="px-5 pt-5">
-              <img src={image3} alt="Shoes" className="rounded-xl" />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">Our Commitments</h2>
-              <p>
-                Fostering a culture of inclusivity, diversity, and respect for
-                all individuals within our community.
-              </p>
+                  <p>
+                    Empowering Medical Professional with secure,user-friendly
+                    technology to optimize Patient care and privacy compliance.
+                  </p>
+                </div>
+              </div>
+
+              <div className="card w-[30rem] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 mt-7">
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title">Our Vision</h2>
+                  <p>
+                    Our Vision is to revolutionize healthcare by providing a
+                    seamless integrated platform that empowers medical
+                    professionals.
+                  </p>
+                </div>
+              </div>
+
+              <div className="card w-[30rem] bg-[#167FE7] shadow-xl hover:scale-105 transition-all duration-300 mt-7 text-white">
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title">Our Commitments</h2>
+                  <p>
+                    Fostering a culture of inclusivity, diversity, and respect
+                    for all individuals within our community.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
