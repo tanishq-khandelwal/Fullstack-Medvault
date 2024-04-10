@@ -71,7 +71,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex items-center justify-evenly mt-10">
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 hover:text-white hover:bg-[#245ED7]">
+          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
             <figure className="px-5 pt-5">
               <img src={image} alt="Shoes" className="rounded-xl" />
             </figure>
@@ -123,10 +123,10 @@ const HomePage = () => {
         </div>
 
         <div className="flex items-center justify-evenly mt-10">
-          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[310px]  h-[360px] bg-[#2386E3] shadow-2xl hover:scale-105 transition-all duration-300 text-white">
             <figure className="px-10 pt-10">
               <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
-                <FaHeartbeat className="h-[42px] w-[40px]" />
+                <FaHeartbeat className="h-[42px] w-[40px] text-black" />
               </div>
             </figure>
             <div className="card-body items-center text-center">
