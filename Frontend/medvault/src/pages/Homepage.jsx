@@ -6,7 +6,8 @@ import { HiCircleStack } from "react-icons/hi2";
 import image from "../assets/image2.png";
 import image2 from "../assets/image3.png";
 import image3 from "../assets/image.png";
-import homepageimg from "../assets/Homepage.jpg";
+import homepageimg from "../assets/Homepage2.png";
+
 const HomePage = () => {
   return (
     <Layout>
@@ -18,25 +19,47 @@ const HomePage = () => {
         />
       </div> */}
 
-<div className="pt-10 flex items-center justify-center mx-16 h-[90vh]">
-  <div className="w-full flex justify-between">
-    <div className="w-[50%] flex flex-col justify-start items-start ml-5 mt-[6rem]">
-      <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl">
-        <span className="text-blue-600">Med</span>Vault
-      </h1>
-      <p className="text-lg md:text-xl lg:text-2xl mt-5">
-        A Secure and Accessible Patient Information Platform for Healthcare Professionals
-      </p>
+      <div className="pt-10 flex items-center justify-center mx-16 h-[90vh]">
+        <div className="w-full flex justify-between">
+          <div className="w-[50%] flex flex-col justify-start items-start ml-5 mt-[6rem]">
+            <div className="flex">
+              <div>
+                <img src={Logo} alt="Logo" className="h-[40px] w-[40px]" />
+              </div>
+              <div className="mt-2 ml-3">
+                <h1 className="font-bold text-2xl  ">
+                  <span className="text-blue-600">Med</span>Vault
+                </h1>
+              </div>
+            </div>
 
-      <button className="btn btn-outline btn-info mt-[4rem]  hover:bg-blue-600">Contact Us</button>
+            <h1 className="text-lg md:text-5xl lg:text-5xl mt-5 font-bold">
+              Find the good Life by good Health
+            </h1>
 
-    </div>
-    <div className="h-[35rem] w-[32rem] items-center justify-end ml-[15rem] mr-[5rem]">
-      <img src={homepageimg} alt="homepage img" className="h-[400px] w-[35rem]" />
-    </div>
-  </div>
-</div>
+            <p className="text-lg md:text-xl lg:text-xl mt-7 text-[#AAAAAA]">
+              A Secure and Accessible Patient Information Platform for
+              Healthcare Professionals
+            </p>
+            <div className="flex ">
+              <button className="btn border btn-info mt-[3rem] bg-white  hover:bg-blue-600 hover:text-white text-blue-600">
+                Contact Us
+              </button>
 
+              <button className=" btn border mt-[3rem] border-[#DE9604] text-[#DE9604]  bg-white transition duration-300 ease-in-out hover:bg-[#DE9604] hover:text-white ml-10">
+                About Us
+              </button>
+            </div>
+          </div>
+          <div className="h-[35rem] w-[50rem] items-center justify-end ml-[15rem] mr-[5rem]">
+            <img
+              src={homepageimg}
+              alt="homepage img"
+              className="h-[500px] w-[40rem]"
+            />
+          </div>
+        </div>
+      </div>
 
       {/* About US */}
       <div className="h-[90vh] bg-[#EFF7FF]">
@@ -48,7 +71,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex items-center justify-evenly mt-10">
-          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-96 bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 hover:text-white hover:bg-[#245ED7]">
             <figure className="px-5 pt-5">
               <img src={image} alt="Shoes" className="rounded-xl" />
             </figure>
@@ -117,7 +140,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-2xl hover:scale-105 transition-all duration-300">
             <figure className="px-10 pt-10">
               <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
                 <FaBell className="h-[42px] w-[40px]" />

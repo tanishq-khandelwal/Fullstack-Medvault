@@ -76,7 +76,7 @@ const Layout = ({ children }) => {
 
             {/* Other sidebar items */}
             {!isLoggedIn && (
-              <li className="absolute bottom-4 w-full">
+              <li className="absolute bottom-4 w-full ">
                 <div className="w-full flex items-center justify-center">
                   <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white">
                     <Link to={"/login"}>Login</Link>

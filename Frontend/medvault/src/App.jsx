@@ -6,6 +6,7 @@ import store from "./Redux/store.js"; // Import your Redux store
 // import Layout from "./layout/Layout.jsx";
 import HomePage from "./pages/Homepage.jsx";
 import Login from "./pages/Login.jsx";
+// import SignUp from "./pages/Signup.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login/>}/>
+        {/* <Route path="/signup" element={<SignUp/>}/> */}
       </Routes>
     </Provider>
   );
