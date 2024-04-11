@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
             </li>
 
             <li>
-              <a>Contact Us</a>
+            <Link to={"/contact"}>Contact</Link>
             </li>
 
             {/* Other sidebar items */}
