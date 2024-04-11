@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
               <Link to={"/"}>Home</Link>
             </li>
             <li>
-              <a>Dashboard</a>
+            <Link to={"/dashboard"}>Dashboard</Link>
             </li>
             <li>
               <Link to={"/patientList"}>Patient List</Link>
@@ -78,12 +78,16 @@ const Layout = ({ children }) => {
             {!isLoggedIn && (
               <div className="absolute bottom-4 w-full ">
                 <div className="w-full flex items-center justify-center">
+                <Link to={"/login"}>
                   <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4 ">
-                    <Link to={"/login"}>Login</Link>
+                    Login
                   </button>
+                  </Link>
+                  <Link to={"/signup"}>
                   <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-[#DE9604] text-white">
-                    <Link to={"/signup"}>Signup</Link>
+                    Signup
                   </button>
+                  </Link>
                 </div>
               </div>
             )}
@@ -91,12 +95,16 @@ const Layout = ({ children }) => {
             {isLoggedIn && (
               <div className="absolute bottom-4 w-full">
                 <div className="w-full flex items-center justify-center">
+                <Link to={"/profile"}>
                   <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4">
-                    <Link to={"/profile"}>Profile</Link>
+                    Profile
                   </button>
+                  </Link>
+                  <Link to={"/logout"}>
                   <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-red-600 text-white">
-                    <Link to={"/logout"}>Logout</Link>
+                    Logout
                   </button>
+                  </Link>
                 </div>
               </div>
             )}

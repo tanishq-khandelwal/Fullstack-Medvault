@@ -8,6 +8,7 @@ import image2 from "../assets/image3.png";
 import image3 from "../assets/image.png";
 import homepageimg from "../assets/Homepage2.png";
 import { GiStairsGoal } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -35,12 +36,14 @@ const HomePage = () => {
               Healthcare Professionals
             </p>
             <div className="flex justify-center lg:justify-start mt-3 lg:mt-7">
+            <Link to={"/contact"}>
               <button className="btn border btn-info bg-white hover:bg-blue-600 hover:text-white text-blue-600 lg:mr-4">
-                Contact Us
+              Contact Us
               </button>
+              </Link>
 
               <button className="btn border border-[#DE9604] text-[#DE9604] bg-white hover:bg-[#DE9604] hover:text-white">
-                About Us
+                <Link to={"/aboutus"}/> About Us
               </button>
             </div>
           </div>

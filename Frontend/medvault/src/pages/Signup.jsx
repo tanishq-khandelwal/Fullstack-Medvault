@@ -101,8 +101,8 @@ const SignUp = () => {
           </div>
           <div className="  w-[50rem] mt-[1rem]">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-              <div className="w-full bg-white rounded-lg shadow-2xl md:mt-0 sm:max-w-md xl:p-0">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8 h-[45rem] w-100%">
+              <div className="w-[75%] bg-white rounded-lg shadow-2xl md:mt-0  ml-[8rem]" >
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8 h-[45rem] ">
                   <div className="flex ml-10">
                     <div>
                       <img
