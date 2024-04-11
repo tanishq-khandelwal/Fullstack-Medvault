@@ -8,118 +8,100 @@ import image2 from "../assets/image3.png";
 import image3 from "../assets/image.png";
 import homepageimg from "../assets/Homepage2.png";
 import { GiStairsGoal } from "react-icons/gi";
-import { GoGoal } from "react-icons/go";
-import { GiBinoculars } from "react-icons/gi";
 
 const HomePage = () => {
   return (
     <Layout>
-      {/* <div className="flex items-center justify-center">
-        <img
-          src={Logo}
-          alt="Logo"
-          className="h-[5rem] w-15 ml-[60rem] image-logo"
-        />
-      </div> */}
-
-      <div className="pt-10 flex items-center justify-center mx-16 h-[90vh]">
-        <div className="w-full flex justify-between">
-          <div className="w-[50%] flex flex-col justify-start items-start ml-5 mt-[6rem]">
-            <div className="flex">
-              <div>
-                <img src={Logo} alt="Logo" className="h-[40px] w-[40px]" />
-              </div>
-              <div className="mt-2 ml-3">
-                <h1 className="font-bold text-2xl  ">
-                  <span className="text-blue-600">Med</span>Vault
-                </h1>
-              </div>
+      <div className="pt-10 flex flex-col items-center justify-center mx-4 lg:mx-16 h-auto lg:h-[90vh]">
+        <div className="w-full flex flex-col lg:flex-row justify-between items-center lg:items-start">
+          <div className="w-full lg:w-[50%] flex flex-col justify-start items-center lg:items-start">
+            <div className="flex items-center mt-[5rem]">
+              <img
+                src={Logo}
+                alt="Logo"
+                className="h-10 w-10 lg:h-12 lg:w-12"
+              />
+              <h1 className="font-bold text-lg lg:text-2xl text-center lg:text-left ml-2 lg:ml-3">
+                <span className="text-blue-600">Med</span>Vault
+              </h1>
             </div>
 
-            <h1 className="text-lg md:text-5xl lg:text-5xl mt-5 font-bold">
+            <h1 className="text-lg lg:text-5xl mt-2 lg:mt-5 font-bold text-center lg:text-left">
               Find the good Life by good Health
             </h1>
 
-            <p className="text-lg md:text-xl lg:text-xl mt-7 text-[#AAAAAA]">
+            <p className="text-base lg:text-xl mt-2 lg:mt-7 text-[#AAAAAA] text-center lg:text-left">
               A Secure and Accessible Patient Information Platform for
               Healthcare Professionals
             </p>
-            <div className="flex ">
-              <button className="btn border btn-info mt-[3rem] bg-white  hover:bg-blue-600 hover:text-white text-blue-600">
+            <div className="flex justify-center lg:justify-start mt-3 lg:mt-7">
+              <button className="btn border btn-info bg-white hover:bg-blue-600 hover:text-white text-blue-600 lg:mr-4">
                 Contact Us
               </button>
 
-              <button className=" btn border mt-[3rem] border-[#DE9604] text-[#DE9604]  bg-white transition duration-300 ease-in-out hover:bg-[#DE9604] hover:text-white ml-10">
+              <button className="btn border border-[#DE9604] text-[#DE9604] bg-white hover:bg-[#DE9604] hover:text-white">
                 About Us
               </button>
             </div>
           </div>
-          <div className="h-[35rem] w-[50rem] items-center justify-end ml-[15rem] mr-[5rem]">
+          <div className="h-[35rem] lg:w-[50%] flex justify-center items-center mt-7 lg:mt-0">
             <img
               src={homepageimg}
               alt="homepage img"
-              className="h-[500px] w-[40rem]"
+              className="h-[400px] lg:h-[500px] w-[300px] lg:w-[35rem]"
             />
           </div>
         </div>
       </div>
 
       {/* About US */}
-      <div className="h-[110vh] bg-[#EFF7FF]">
+      <div className="h-auto lg:h-[110vh] bg-[#EFF7FF] flex flex-col items-center">
         <div className="flex items-center justify-center">
           <p className="mt-10 font-sans font-bold text-5xl text-[#2386E3]">
             About
           </p>
           <p className="mt-10 font-sans font-bold text-5xl ml-4">Us</p>
         </div>
-        <div className="flex mt-[4rem]">
-          <div className="h-[35rem] w-[28rem] ml-[6rem] mt-[2rem]">
+        <div className="flex flex-col lg:flex-row mt-[2rem] lg:mt-[4rem] w-full justify-center lg:justify-evenly">
+          <div className="h-[30rem] lg:w-[25rem] lg:ml-[6rem] mt-[2rem]">
             <img
               src={image3}
               alt="About Us"
-              className="h-[100%] w-[100%] shadow-2xl rounded-tl-[40px]  rounded-br-[40px]"
+              className="h-full w-full shadow-2xl rounded-tl-[40px]  rounded-br-[40px]"
             />
           </div>
-          <div>
-            <div className="flex-column items-center justify-around mt-10 ml-[8rem]">
-              <div className="card w-[30rem] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
-                <div className="card-body items-center text-center">
-                  <div className="flex items-start">
-                    <div className="justify-start">
-                      {/* <GiStairsGoal className="h-[40px] w-[40px]  " /> */}
-                    </div>
-
-                    <div>
-                      <h2 className="card-title">Our Mission</h2>
-                    </div>
-                  </div>
-
-                  <p>
-                    Empowering Medical Professional with secure,user-friendly
-                    technology to optimize Patient care and privacy compliance.
-                  </p>
+          <div className="grid gap-6  lg:ml-[8rem]">
+            <div className="card w-[30rem] lg:w-[32rem] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 mb-5 lg:mb-0">
+              <div className="card-body items-center text-center lg:text-left">
+                <div className="flex items-start">
+                  {/* <GiStairsGoal className="h-[40px] w-[40px] mr-2" /> */}
+                  <h2 className="card-title">Our Mission</h2>
                 </div>
+                <p>
+                  Empowering Medical Professional with secure,user-friendly
+                  technology to optimize Patient care and privacy compliance.
+                </p>  
               </div>
+            </div>
 
-              <div className="card w-[30rem] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 mt-7">
-                <div className="card-body items-center text-center">
-                  <h2 className="card-title">Our Vision</h2>
-                  <p>
-                    Our Vision is to revolutionize healthcare by providing a
-                    seamless integrated platform that empowers medical
-                    professionals.
-                  </p>
-                </div>
+            <div className="card w-[30rem] lg:w-[32rem] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 mb-5 lg:mb-0">
+              <div className="card-body items-center text-center lg:text-left">
+                <h2 className="card-title">Our Vision</h2>
+                <p>
+                  Our Vision is to revolutionize healthcare by providing a
+                  seamless integrated platform that empowers medical
+                  professionals.
+                </p>
               </div>
+            </div>
 
-              <div className="card w-[32rem] bg-[#167FE7] shadow-2xl hover:scale-105 transition-all duration-300 mt-7 text-white">
-                <div className="card-body items-center text-center">
-                  <h2 className="card-title">Our Commitments</h2>
-                  <p>
-                    Fostering a culture of inclusivity, diversity, and respect
-                    for all individuals within our community.
-                  </p>
-                </div>
+            <div className="card w-[32rem] bg-[#167FE7] shadow-2xl hover:scale-105 transition-all duration-300 text-white">
+              <div className="card-body items-center text-center lg:text-left">
+                <h2 className="card-title">Our Commitments</h2>
+                <p>
+                  Fostering a culture of inclusivity, diversity, and respect for
+                  all individuals within our community.
+                </p>
               </div>
             </div>
           </div>
@@ -127,7 +109,7 @@ const HomePage = () => {
       </div>
 
       {/* Our Services */}
-      <div className="h-[90vh] bg-white mt-10">
+      <div className="h-auto lg:h-[90vh] bg-white mt-10 flex flex-col items-center">
         <div className="flex items-center justify-center">
           <p className="mt-10 font-sans font-bold text-5xl text-[#2386E3]">
             Our
@@ -135,8 +117,8 @@ const HomePage = () => {
           <p className="mt-10 font-sans font-bold text-5xl ml-4">Services</p>
         </div>
 
-        <div className="flex items-center justify-evenly mt-10">
-          <div className="card w-[310px]  h-[360px] bg-[#2386E3] shadow-2xl hover:scale-105 transition-all duration-300 text-white">
+        <div className="flex flex-wrap justify-evenly  mt-10">
+          <div className="card w-[310px]  h-[360px] lg:h-[auto] bg-[#2386E3] shadow-2xl hover:scale-105 transition-all duration-300 text-white m-4">
             <figure className="px-10 pt-10">
               <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
                 <FaHeartbeat className="h-[42px] w-[40px] text-black" />
@@ -153,7 +135,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-2xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[300px] h-[350px] lg:h-[auto] bg-base-100 shadow-2xl hover:scale-105 transition-all duration-300 m-4">
             <figure className="px-10 pt-10">
               <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
                 <FaBell className="h-[42px] w-[40px]" />
@@ -170,7 +152,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[300px]  h-[350px] lg:h-[auto] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 m-4">
             <figure className="px-10 pt-10">
               <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
                 <PiNotepadFill className="h-[42px] w-[40px]" />
@@ -188,7 +170,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="card w-[300px]  h-[350px] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="card w-[300px]  h-[350px] lg:h-[auto] bg-base-100 shadow-xl hover:scale-105 transition-all duration-300 m-4">
             <figure className="px-10 pt-10">
               <div className="w-[70px] h-[67px] bg-[#E9F6FF] items-center flex justify-center rounded-full">
                 <HiCircleStack className="h-[42px] w-[40px]" />

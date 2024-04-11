@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="h-[90vh] ">
+    <div className="h-screen relative ">
       <div className="drawer absolute z-50 left-0 w-fit">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -52,11 +52,11 @@ const Layout = ({ children }) => {
           </label>
         </div>
 
-        <div className="drawer-side w-0">
+        <div className="drawer-side w-0 lg:w-64">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-48 sm:w-80 bg-base-100 text-base-content relative h-[100vh] ">
+          <ul className="menu p-4 w-48 sm:w-80 bg-base-100 text-base-content relative h-screen ">
             <li className="w-fit absolute right-2 z-50">
-              <button onClick={hideDrawer}>
+              <button onClick={hideDrawer}> 
                 <AiFillCloseCircle size={24} />
               </button>
             </li>

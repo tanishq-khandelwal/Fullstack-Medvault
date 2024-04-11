@@ -30,11 +30,11 @@ const PatientList = () => {
                 </button>
               </div>
             </div>
-            <div className="w-full flex justify-around items-center">
-              <p className="text-sky-500">Patient Name</p>
-              <p className="text-sky-500">Gender</p>
-              <p className="text-sky-500">Age</p>
-              <p className="text-sky-500">Mobile Number</p>
+            <div className="w-full flex justify-around items-center font-semibold  font-sans">
+              <p className="text-sky-500 ">Patient Name</p>
+              <p className="text-sky-500 ">Gender</p>
+              <p className="text-sky-500 ">Age</p>
+              <p className="text-sky-500 ">Mobile Number</p>
             </div>
 
             <>
