@@ -7,6 +7,7 @@ import store from "./Redux/store.js"; // Import your Redux store
 import HomePage from "./pages/Homepage.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/Signup.jsx";
+import PatientList from "./pages/Patient/patientList.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/patientList" element={<PatientList/>}/>
       </Routes>
     </Provider>
   );

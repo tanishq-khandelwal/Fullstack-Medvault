@@ -92,7 +92,7 @@ const SignUp = () => {
         </div>
         <div>
           <div className="items-center justify-center ml-[12rem] mt-[8rem]">
-            <h1 className="font-sans font-bold text-5xl">Welcome to Family </h1>
+            <h1 className="font-sans font-bold text-5xl">Welcome to the Family </h1>
             <br />
             <p className="font-sans font-semibold text-xl text-[#A4ABB9]">
               A Family of Health Innovations: Transforming Care, Empowering

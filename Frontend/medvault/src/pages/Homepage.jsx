@@ -112,7 +112,7 @@ const HomePage = () => {
                 </div>
               </div>
 
-              <div className="card w-[30rem] bg-[#167FE7] shadow-xl hover:scale-105 transition-all duration-300 mt-7 text-white">
+              <div className="card w-[32rem] bg-[#167FE7] shadow-2xl hover:scale-105 transition-all duration-300 mt-7 text-white">
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">Our Commitments</h2>
                   <p>

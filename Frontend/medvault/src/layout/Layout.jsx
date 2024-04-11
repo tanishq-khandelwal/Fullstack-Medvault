@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
               <a>Dashboard</a>
             </li>
             <li>
-              <a>Patient List</a>
+              <Link to={"/patientList"}>Patient List</Link>
             </li>
 
             <li>
@@ -76,29 +76,29 @@ const Layout = ({ children }) => {
 
             {/* Other sidebar items */}
             {!isLoggedIn && (
-              <li className="absolute bottom-4 w-full ">
+              <div className="absolute bottom-4 w-full ">
                 <div className="w-full flex items-center justify-center">
-                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white">
+                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4 ">
                     <Link to={"/login"}>Login</Link>
                   </button>
                   <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-[#DE9604] text-white">
                     <Link to={"/signup"}>Signup</Link>
                   </button>
                 </div>
-              </li>
+              </div>
             )}
 
             {isLoggedIn && (
-              <li className="absolute bottom-4 w-full">
+              <div className="absolute bottom-4 w-full">
                 <div className="w-full flex items-center justify-center">
-                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white">
+                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4">
                     <Link to={"/profile"}>Profile</Link>
                   </button>
                   <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-red-600 text-white">
                     <Link to={"/logout"}>Logout</Link>
                   </button>
                 </div>
-              </li>
+              </div>
             )}
           </ul>
         </div>
