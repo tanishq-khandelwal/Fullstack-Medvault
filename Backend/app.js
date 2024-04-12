@@ -24,7 +24,7 @@ app.use(
     credentials: true,
     httpOnly: false,
     optionSuccessStatus: 200,
-    sameSite: "Lax",
+    sameSite: "None",
     secure: true,
     methods: "GET, POST, PUT, DELETE", // Specify the allowed HTTP methods
     allowedHeaders: "Content-Type, Authorization",
