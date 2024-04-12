@@ -15,10 +15,10 @@ const cookieOptions = {
  * @ACCESS Public
  */
 export const registerUser = async (req, res, next) => {
-  const { fullName, email, password ,mobile,type, role} = req.body;
+  const { fullName, email, password ,mobile,type} = req.body;
   let user; // Declare user variable outside the try block
 
-  if (!fullName || !email || !password || !mobile || !type || !role ) {
+  if (!fullName || !email || !password || !mobile || !type  ) {
     return next(new AppError("All Fields are Required", 400));
   }
 
@@ -38,7 +38,7 @@ export const registerUser = async (req, res, next) => {
         password,
         mobile,
         type,
-        role
+
       });
     }
 

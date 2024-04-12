@@ -15,8 +15,9 @@ const cookieOptions = {
 export const registerReceptionist = async (req, res, next) => {
   const { fullName, email, password } = req.body;
   let receptionist; // Declare user variable outside the try block
-
+  console.log(req.body);
   if (!fullName || !email || !password) {
+    console.log(Error);
     return next(new AppError("All Fields are Required", 400));
   }
 

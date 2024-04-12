@@ -3,80 +3,113 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import signupimg from "../assets/signup.png";
 import Logo from "../assets/react.svg";
-// import { register } from "./context";
-// import { setLocalStorageValueForKey } from "../../utils/localStorage";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
+import { createAccount,createAccountDoc } from "../Redux/authSlice";
 
 const SignUp = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "RECEPTIONIST",
-  });
-  const [doctorFormData, setDoctorFormData] = useState({
-    name: "",
-    speciality: "",
-    number: "",
-    email: "",
-    password: "",
-    role: "DOCTOR",
-  });
   const [errors, setErrors] = useState({});
   const [registerType, setRegisterType] = useState("DOCTOR");
 
-  const handleDoctorInputChange = (e) => {
-    const { name, value } = e.target;
-    setDoctorFormData({ ...doctorFormData, [name]: value });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [signupData, setSignupData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleUserInput = (event) => {
+    const { name, value } = event.target;
+    setSignupData({
+      ...signupData,
+      [name]: value,
+    });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const [signupDataDoc, setSignupDataDoc] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    mobile: "",
+    type:""
+  });
+
+  const handleUserInputDoc = (event) => {
+    const { name, value } = event.target;
+    setSignupDataDoc({
+      ...signupDataDoc,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let errors = {};
+  const createNewAccount = async (event) => {
+    if (registerType == "RECEPTIONIST") {
+      event.preventDefault();
+      try {
+        if (!signupData.email || !signupData.fullName || !signupData.password) {
+          toast.error("Please Fill all the Details");
+          return;
+        }
 
-    if (registerType === "DOCTOR") {
-      if (!doctorFormData.name) {
-        errors.name = "Name is required";
-      }
-      if (!doctorFormData.speciality) {
-        errors.speciality = "Speciality is required";
-      }
-      if (!doctorFormData.number) {
-        errors.number = "Mobile number is required";
-      }
-      if (!doctorFormData.email) {
-        errors.email = "Email is required";
-      }
-      if (!doctorFormData.password) {
-        errors.password = "Password is required";
-      }
-    } else {
-      if (!formData.name) {
-        errors.name = "Name is required";
-      }
-      if (!formData.email) {
-        errors.email = "Email is required";
-      }
-      if (!formData.password) {
-        errors.password = "Password is required";
+        const formData = new FormData();
+        formData.append("fullName", signupData.fullName);
+        formData.append("email", signupData.email);
+        formData.append("password", signupData.password);
+
+        console.log(formData);
+
+        const response = await dispatch(createAccount(formData));
+        if (response.payload?.success) {
+          navigate("/");
+        }
+
+        setSignupData({
+          fullName: "",
+          email: "",
+          password: "",
+        });
+      } catch (error) {
+        toast.error("An Error Occurred");
+        console.log(error);
       }
     }
+    else
+    {
+      event.preventDefault();
+      try {
+        if (!signupDataDoc.email || !signupDataDoc.fullName || !signupDataDoc.password ) {
+          toast.error("Please Fill all the Details");
+          return;
+        }
 
-    if (Object.keys(errors).length === 0) {
-    } else {
-      setErrors(errors);
-    }
+        const formData = new FormData();
+        formData.append("fullName", signupDataDoc.fullName);
+        formData.append("mobile", signupDataDoc.mobile);
+        formData.append("type", signupDataDoc.type);
+        formData.append("email", signupDataDoc.email);
+        formData.append("password", signupDataDoc.password);
+        
 
-    const doctorRegister = 0;
-    const res = doctorRegister.user;
-    if (res) {
-      // setLocalStorageValueForKey("userId", res._id);
-      navigate(`/${res._id}`);
+        console.log(formData);
+
+        const response = await dispatch(createAccountDoc(formData));
+        if (response.payload?.success) {
+          navigate("/");
+        }
+
+        setSignupDataDoc({
+          fullName: "",
+          email: "",
+          password: "",
+          mobile:"",
+          type:""
+        });
+      } catch (error) {
+        toast.error("An Error Occurred");
+        console.log(error);
+      }
     }
   };
 
@@ -92,7 +125,9 @@ const SignUp = () => {
         </div>
         <div>
           <div className="items-center justify-center ml-[12rem] mt-[8rem]">
-            <h1 className="font-sans font-bold text-5xl">Welcome to the Family </h1>
+            <h1 className="font-sans font-bold text-5xl">
+              Welcome to the Family{" "}
+            </h1>
             <br />
             <p className="font-sans font-semibold text-xl text-[#A4ABB9]">
               A Family of Health Innovations: Transforming Care, Empowering
@@ -101,7 +136,7 @@ const SignUp = () => {
           </div>
           <div className="  w-[50rem] mt-[1rem]">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-              <div className="w-[75%] bg-white rounded-lg shadow-2xl md:mt-0  ml-[8rem]" >
+              <div className="w-[75%] bg-white rounded-lg shadow-2xl md:mt-0  ml-[8rem]">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8 h-[45rem] ">
                   <div className="flex ml-10">
                     <div>
@@ -141,7 +176,7 @@ const SignUp = () => {
                   </div>
                   <form
                     className="space-y-4 md:space-y-6"
-                    onSubmit={handleSubmit}
+                    onSubmit={createNewAccount}
                   >
                     {registerType === "DOCTOR" ? (
                       <>
@@ -154,13 +189,12 @@ const SignUp = () => {
                           </label>
                           <input
                             type="text"
-                            name="name"
+                            name="fullName"
                             id="name"
-                            value={doctorFormData.name}
-                            onChange={handleDoctorInputChange}
+                            value={signupDataDoc.fullName}
+                            onChange={handleUserInputDoc}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             placeholder="Enter name"
-                            required=""
                           />
                           {errors.name && (
                             <span style={{ color: "red" }}>{errors.name}</span>
@@ -175,10 +209,10 @@ const SignUp = () => {
                           </label>
                           <input
                             type="text"
-                            name="speciality"
+                            name="type"
                             id="speciality"
-                            value={doctorFormData.speciality}
-                            onChange={handleDoctorInputChange}
+                            value={signupDataDoc.type}
+                            onChange={handleUserInputDoc}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             placeholder="Enter speciality"
                             required=""
@@ -198,10 +232,10 @@ const SignUp = () => {
                           </label>
                           <input
                             type="number"
-                            name="number"
+                            name="mobile"
                             id="number"
-                            value={doctorFormData.number}
-                            onChange={handleDoctorInputChange}
+                            value={signupDataDoc.mobile}
+                            onChange={handleUserInputDoc}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             placeholder="Enter mobile number"
                             required=""
@@ -223,8 +257,8 @@ const SignUp = () => {
                             type="email"
                             name="email"
                             id="email"
-                            value={doctorFormData.email}
-                            onChange={handleDoctorInputChange}
+                            value={signupDataDoc.email}
+                            onChange={handleUserInputDoc}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             placeholder="Enter email"
                             required=""
@@ -244,8 +278,8 @@ const SignUp = () => {
                             type="password"
                             name="password"
                             id="password"
-                            value={doctorFormData.password}
-                            onChange={handleDoctorInputChange}
+                            value={signupDataDoc.password}
+                            onChange={handleUserInputDoc}
                             placeholder="Enter password"
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             required=""
@@ -261,23 +295,24 @@ const SignUp = () => {
                       <>
                         <div>
                           <label
-                            htmlFor="name"
+                            htmlFor="fullName"
                             className="block mb-2 text-sm font-medium text-gray-900"
                           >
                             Name
                           </label>
                           <input
                             type="text"
-                            name="name"
-                            id="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
+                            name="fullName"
+                            id="fullName"
+                            value={signupData.fullName}
+                            onChange={handleUserInput}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             placeholder="Enter name"
-                            required=""
                           />
-                          {errors.name && (
-                            <span style={{ color: "red" }}>{errors.name}</span>
+                          {errors.fullName && (
+                            <span style={{ color: "red" }}>
+                              {errors.fullName}
+                            </span>
                           )}
                         </div>
                         <div>
@@ -291,8 +326,8 @@ const SignUp = () => {
                             type="email"
                             name="email"
                             id="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
+                            value={signupData.email}
+                            onChange={handleUserInput}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             placeholder="Enter email"
                             required=""
@@ -312,8 +347,8 @@ const SignUp = () => {
                             type="password"
                             name="password"
                             id="password"
-                            value={formData.password}
-                            onChange={handleInputChange}
+                            value={signupData.password}
+                            onChange={handleUserInput}
                             placeholder="Enter password"
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-[0.5rem]"
                             required=""
@@ -348,7 +383,12 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <br/><br/><br/><br/><br/><br/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Layout>
   );
 };

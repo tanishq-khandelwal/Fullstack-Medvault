@@ -20,11 +20,11 @@ app.set("trust proxy", 1);
 // CORS middleware
 app.use(
   cors({
-    origin: ["https://medvault.vercel.app", "http://localhost:5173", "*"],
+    origin: ["http://localhost:5173", "*","https://fullstack-medvault.vercel.app/"],
     credentials: true,
     httpOnly: false,
     optionSuccessStatus: 200,
-    sameSite: "None",
+    sameSite: "Lax",
     secure: true,
     methods: "GET, POST, PUT, DELETE", // Specify the allowed HTTP methods
     allowedHeaders: "Content-Type, Authorization",
