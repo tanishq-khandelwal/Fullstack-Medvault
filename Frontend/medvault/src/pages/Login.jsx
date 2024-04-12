@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loginimg from "../assets/Login.png";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-
-import { LoginUser } from "../Redux/authSlice";
+import { LoginReception, LoginUser } from "../Redux/authSlice";
 
 const Login = () => {
+  const [userType, setUserType] = useState('doctor');
+
+  const handleUserTypeChange = (event) => {
+    setUserType(event.target.value);
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,8 +41,10 @@ const Login = () => {
       const formData = new FormData();
       formData.append("email", email);
       formData.append("password", password);
-
+    
+      if(userType=='doctor'){
       const response = await dispatch(LoginUser(formData));
+      
       if (response.payload?.success) {
         navigate("/");
       } else {
@@ -49,6 +55,20 @@ const Login = () => {
         email: "",
         password: "",
       });
+    }else{
+      const response = await dispatch(LoginReception(formData));
+      
+      if (response.payload?.success) {
+        navigate("/");
+      } else {
+        toast.error("Failed to login");
+      }
+
+      setLoginData({
+        email: "",
+        password: "",
+      });
+    }
     } catch (error) {
       toast.error("An Error Occurred");
     }
@@ -56,7 +76,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center">
         <div className="h-[500px] w-[400px] mr-[10rem] mt-12">
           <img src={Loginimg} alt="Login Image" />
         </div>
@@ -64,12 +84,12 @@ const Login = () => {
         <section className="bg-white">
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div className="w-full bg-gray-50 rounded-lg drop-shadow-xl md:mt-0 sm:max-w-md xl:p-0">
-              <div className="p-6 space-y-4 md:space-y-6  h-[400px] w-[400px] sm:p-8">
+              <div className="p-6 space-y-4 md:space-y-6 h-[500px] w-[400px] sm:p-8">
                 <h1 className="text-xl font-semibold leading-tight tracking-tight text-[#2286E2] md:text-2xl">
                   Sign In
                 </h1>
 
-                <form className="space-y-4 md:space-y-6"onSubmit={onLogin}>
+                <form className="space-y-4 md:space-y-6" onSubmit={onLogin}>
                   <div>
                     <label
                       htmlFor="email"
@@ -105,6 +125,24 @@ const Login = () => {
                       required
                     />
                   </div>
+                  <div>
+                    <label
+                      htmlFor="userType"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      User Type
+                    </label>
+                    <select
+                      name="userType"
+                      id="userType"
+                      value={userType}
+                      onChange={handleUserTypeChange}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                    >
+                      <option value="doctor">Doctor</option>
+                      <option value="receptionist">Receptionist</option>
+                    </select>
+                  </div>
 
                   <button
                     type="submit"
@@ -114,12 +152,6 @@ const Login = () => {
                   </button>
                   <p className="text-sm font-light text-gray-500">
                     Don't have an account?{" "}
-                    {/* <a
-                  href="/signup"
-                  className="font-medium text-primary-600 hover:underline"
-                >
-                  Register
-                </a> */}
                     <Link
                       to="/signup"
                       className="font-medium text-[#2286E2] hover:underline"

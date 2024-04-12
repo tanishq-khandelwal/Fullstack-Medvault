@@ -101,6 +101,28 @@ export const createAccount = createAsyncThunk('auth/signup', async (data) => {
   });
 
 
+  export const LoginReception = createAsyncThunk('auth/loginr', async (data) => {
+    try {
+      const promise = axiosInstance.post('reception/login', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }});
+      const res = await toast.promise(promise, {
+        loading: "Loading.....",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        // error: toast.error("Failed to Login"), // Fix the placement of closing parenthesis
+      });
+  
+      return res.data;
+    } catch (error) {
+      toast.error(error.message);
+      throw error; // Throwing error here so that the rejectedWithValue can catch it
+    }
+  });
+
+
   export const logout=createAsyncThunk('auth/logout',async(data)=>{
     try{
       const promise=axiosInstance.post('user/logout', data, {
@@ -139,6 +161,15 @@ const authSlice = createSlice({
         localStorage.clear();
         state.isLoggedIn=false;
         state.data={};
+      })
+
+      .addCase(LoginReception.fulfilled,(state,action)=>{
+        localStorage.setItem("data",JSON.stringify(action?.payload?.receptionist));
+        localStorage.setItem("isLoggedIn",true),
+        localStorage.setItem("role",action?.payload?.receptionist?.role);
+        state.isLoggedIn=true,
+        state.data=action?.payload?.receptionist,
+        state.role=action?.payload?.receptionist?.role
       })
   }
 });
