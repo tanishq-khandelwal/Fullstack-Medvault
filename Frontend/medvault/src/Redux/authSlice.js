@@ -56,11 +56,15 @@ export const createAccount = createAsyncThunk('auth/signup', async (data) => {
       // Wait for the promise to resolve
       const res = await promise;
   
+
+     
+      const successToast = toast.success(res.data.message);
+
+      // Wait for the success toast to be displayed
+      await successToast;
+  
       // Close the loading toast
       toast.dismiss(loadingToast);
-  
-      // Display success toast with the message from the response
-      toast.success(res.data.message);
   
       // Return the data from the response
       return res.data;
@@ -74,10 +78,69 @@ export const createAccount = createAsyncThunk('auth/signup', async (data) => {
   });
   
 
+
+  export const LoginUser = createAsyncThunk('auth/login', async (data) => {
+    try {
+      const promise = axiosInstance.post('user/login', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }});
+      const res = await toast.promise(promise, {
+        loading: "Loading.....",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        // error: toast.error("Failed to Login"), // Fix the placement of closing parenthesis
+      });
+  
+      return res.data;
+    } catch (error) {
+      toast.error(error.message);
+      throw error; // Throwing error here so that the rejectedWithValue can catch it
+    }
+  });
+
+
+  export const logout=createAsyncThunk('auth/logout',async(data)=>{
+    try{
+      const promise=axiosInstance.post('user/logout', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }});
+
+        const res=await toast.promise(promise,{
+          success:(data)=>{
+            return data?.data?.message;
+          }
+        });
+        return res.data;
+    }catch(error){
+      toast.error(error.message);
+      throw error;
+    }
+  })
+  
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {}
+  reducers: {},
+  extraReducers:(builder)=>{
+    builder
+      .addCase(LoginUser.fulfilled,(state,action)=>{
+      localStorage.setItem("data",JSON.stringify(action?.payload?.user));
+      localStorage.setItem("isLoggedIn",true),
+      localStorage.setItem("role",action?.payload?.user?.role);
+      state.isLoggedIn=true,
+      state.data=action?.payload?.user,
+      state.role=action?.payload?.user?.role
+    })
+
+      .addCase(logout.fulfilled,(state,action)=>{
+        localStorage.clear();
+        state.isLoggedIn=false;
+        state.data={};
+      })
+  }
 });
 
 // export const {}=authSlice.actions;
