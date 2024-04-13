@@ -54,6 +54,10 @@ const userSchema = new Schema(
       enum: ["DOCTOR", "RECEPTIONIST"],
       default: "DOCTOR",
     },
+    patients:[{
+      type:Schema.Types.ObjectId,
+      ref:"Patient"
+    }],
     forgotPasswordToken: String,
     forgotPasswordExpiry: Date,
     subscription: {

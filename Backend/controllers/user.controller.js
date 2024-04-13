@@ -186,21 +186,22 @@ export const getUserDetails = async (req, res) => {
 export const getAllUsers = async (req, res, next) => {
   try {
     // Retrieve all users
-    const users = await User.find();
+    const users = await User.find().populate("patients");
 
     // Populate patients associated with each user and get count
-    const populatedUsers = await Promise.all(users.map(async user => {
-      const populatedUser = user.toJSON(); // Convert Mongoose document to plain JavaScript object
-      const patients = await Patient.find({ docid: user._id }); // Populate patients associated with the user
-      populatedUser.patientCount = patients.length; // Get the count of patients
-      populatedUser.patients = patients; // Assign patients to the user object
-      return populatedUser;
-    }));
+    // const populatedUsers = await Promise.all(users.map(async user => {
+    //   const populatedUser = user.toJSON(); // Convert Mongoose document to plain JavaScript object
+    //   const patients = await Patient.find({ docid: user._id }); // Populate patients associated with the user
+    //   populatedUser.patientCount = patients.length; // Get the count of patients
+    //   populatedUser.patients = patients; // Assign patients to the user object
+    //   return populatedUser;
+    // }));
 
     res.status(200).json({
       success: true,
-      count: populatedUsers.length,
-      users: populatedUsers,
+      // count: populatedUsers.length,
+      // users: populatedUsers,
+      users
     });
   } catch (err) {
     return next(new AppError("Error Fetching Users", 500));

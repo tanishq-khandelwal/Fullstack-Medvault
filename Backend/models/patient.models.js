@@ -40,7 +40,7 @@ const patientSchema = new Schema({
   },
   docid: {
     type: String,
-    required: [true, "Doctor Id is required"],
+    required: [true, "docid is required"],
   },
   
 });

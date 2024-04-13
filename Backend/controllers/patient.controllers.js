@@ -1,5 +1,6 @@
 import AppError from "../utils/error.utils.js";
 import Patient from "../models/patient.models.js";
+import User from "../models/user.models.js";
 
 export const addPatient = async (req, res, next) => {
   const { fullName, email, age, address, medication,docid,phone,gender} = req.body;
@@ -23,6 +24,17 @@ export const addPatient = async (req, res, next) => {
       gender,
       medication: medicationValue,
     });
+
+
+    const user = await User.findOneAndUpdate(
+      { _id: docid }, // Assuming docid is the ObjectId of the user
+      { $push: { patients: patient._id } }, // Add the patient's ObjectId to the patients array
+      { new: true } // Return the updated user document
+    );
+
+    if (!user) {
+      return next(new AppError("Doctor not found", 404));
+    }
 
     res.status(201).json({
       success: true,
