@@ -62,7 +62,7 @@ const SignUp = () => {
 
         const response = await dispatch(createAccount(formData));
         if (response.payload?.success) {
-          navigate("/");
+          navigate("/login");
         }
 
         setSignupData({
@@ -96,7 +96,7 @@ const SignUp = () => {
 
         const response = await dispatch(createAccountDoc(formData));
         if (response.payload?.success) {
-          navigate("/");
+          navigate("/login");
         }
 
         setSignupDataDoc({

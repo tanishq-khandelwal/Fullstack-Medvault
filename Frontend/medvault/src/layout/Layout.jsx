@@ -6,11 +6,8 @@ import Footer from "../components/footer";
 import { logout } from "../Redux/authSlice";
 
 const Layout = ({ children }) => {
-
-
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
   const role = useSelector((state) => state?.auth?.role);
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,37 +54,45 @@ const Layout = ({ children }) => {
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-48 sm:w-80 bg-base-100 text-base-content relative h-screen ">
             <li className="w-fit absolute right-2 z-50">
-              <button onClick={hideDrawer}> 
+              <button onClick={hideDrawer}>
                 <AiFillCloseCircle size={24} />
               </button>
             </li>
             <li>
               <Link to={"/"}>Home</Link>
             </li>
-            <li>
-            <Link to={"/dashboard"}>Dashboard</Link>
-            </li>
-            <li>
+
+            {isLoggedIn && role === "DOCTOR" && (
+              <li>
+                <Link to={"/dashboard"}>Dashboard</Link>
+              </li>
+            )}
+
+            {isLoggedIn && role === "DOCTOR" && (
+              <li>
               <Link to={"/patientList"}>Patient List</Link>
-            </li>
+              </li>
+            )}
+
+            
 
             <li>
-            <Link to={"/contact"}>Contact</Link>
+              <Link to={"/contact"}>Contact</Link>
             </li>
 
             {/* Other sidebar items */}
             {!isLoggedIn && (
               <div className="absolute bottom-4 w-full ">
                 <div className="w-full flex items-center justify-center">
-                <Link to={"/login"}>
-                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4 ">
-                    Login
-                  </button>
+                  <Link to={"/login"}>
+                    <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4 ">
+                      Login
+                    </button>
                   </Link>
                   <Link to={"/signup"}>
-                  <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-[#DE9604] text-white">
-                    Signup
-                  </button>
+                    <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-[#DE9604] text-white">
+                      Signup
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -96,15 +101,15 @@ const Layout = ({ children }) => {
             {isLoggedIn && (
               <div className="absolute bottom-4 w-full">
                 <div className="w-full flex items-center justify-center">
-                <Link to={"/profile"}>
-                  <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4">
-                    Profile
-                  </button>
+                  <Link to={"/profile"}>
+                    <button className="btn-primary px-10 py-2 font-semibold rounded-md   bg-blue-500 text-white mr-4">
+                      Profile
+                    </button>
                   </Link>
                   <Link onClick={handleLogout}>
-                  <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-red-600 text-white">
-                    Logout
-                  </button>
+                    <button className="btn-secondary px-8 py-2 font-semibold rounded-md  bg-red-600 text-white">
+                      Logout
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -112,7 +117,6 @@ const Layout = ({ children }) => {
           </ul>
         </div>
       </div>
-
 
       {children}
       <Footer />

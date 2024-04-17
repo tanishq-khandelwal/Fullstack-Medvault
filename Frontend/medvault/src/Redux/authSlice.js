@@ -132,7 +132,7 @@ export const createAccount = createAsyncThunk('auth/signup', async (data) => {
 
         const res=await toast.promise(promise,{
           success:(data)=>{
-            return data?.data?.message;
+            return data?.data?.message; 
           }
         });
         return res.data;

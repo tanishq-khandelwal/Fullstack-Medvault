@@ -13,6 +13,6 @@ router.post("/getPatient", getAllPatients);
 router.get("/allPatient",AllPatients);
 router.post("/submitPresciption",generatePrescription);
 router.post("/healthDetails",HealthDetails);
-router.get("/patientList/:docid",getPatientList)
+router.post("/patientList/:docid",getPatientList)
 
 export default router;

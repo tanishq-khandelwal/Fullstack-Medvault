@@ -67,7 +67,7 @@ export const getPatientList = async (req, res, next) => {
 
         res.status(200).json({
             success: true,
-            message: `Patient List for Doctor ${docid} Fetched Successfully`,
+            message: `Patient List Fetched Successfully`,
             patientCount: populatedPatients.length,
             patients: populatedPatients,
         });
