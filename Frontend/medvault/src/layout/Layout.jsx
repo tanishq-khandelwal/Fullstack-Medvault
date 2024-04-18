@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
     const res = await dispatch(logout());
 
     // redirect to home page if true
-    if (res?.payload?.success) navigate("/");
+    if (res.payload.success) navigate("/");
   };
 
   return (
@@ -68,11 +68,11 @@ const Layout = ({ children }) => {
               </li>
             )}
 
-            {isLoggedIn && role === "DOCTOR" && (
-              <li>
-              <Link to={"/patientList"}>Patient List</Link>
-              </li>
-            )}
+{isLoggedIn && role === "DOCTOR" && (
+  <li>
+    <button onClick={() => navigate("/patientList")}>Patient List</button>
+  </li>
+)}
 
             
 

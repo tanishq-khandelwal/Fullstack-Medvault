@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axiosInstance from "../helper/axiosInstance";
 
 const initialState = {
-  patients: JSON.parse(localStorage.getItem("patientList")) || [],
+  patients: [],
   error: null, // Add error field to handle errors
 };
 
@@ -23,7 +23,7 @@ export const getPatient = createAsyncThunk("patient/patientList",async(data)=>{
     toast.success(res.data.message);
 
     // Return the data from the response
-    return res.data;
+    return res.data.patients;
     } catch (error) {
       toast.error("An Error Occurred");
       toast.error(error?.response?.data?.message);
@@ -40,8 +40,8 @@ const patientSlice = createSlice({
     builder
     .addCase(getPatient.fulfilled, (state, action) => {
         // Update patients array immutably
-        localStorage.setItem("patientList", JSON.stringify(action.payload.patients));
-        state.patients = action.payload.patients; // Access action.payload.patients instead of action.payload
+        // localStorage.setItem("patientList", JSON.stringify(action.payload.patients));
+        state.patients = action.payload // Access action.payload.patients instead of action.payload
         state.error = null; // Reset error state on success
         
       })
@@ -54,4 +54,6 @@ const patientSlice = createSlice({
   },
 });
 
+
+export const{}=patientSlice.actions;
 export default patientSlice.reducer;

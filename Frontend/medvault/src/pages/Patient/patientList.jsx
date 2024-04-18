@@ -2,42 +2,65 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getPatient } from "../../Redux/patientListSlice";
-
+import { toast } from 'react-hot-toast'; // Import toast
 
 const PatientList = () => {
   const dispatch = useDispatch();
+
   const [searchText, setSearchText] = useState("");
-  
+  const [loading, setLoading] = useState(true);
+  const [filteredPatients, setFilteredPatients] = useState([]);
+
   const docId = useSelector((state) => {
     const data = state?.auth?.data;
-    if (data) {
-      const parsedData = JSON.parse(data);
-      // console.log(parsedData._id);
-      return parsedData._id;
-      
+    try {
+      if (data) {
+        const parsedData = JSON.parse(data);
+        return parsedData?._id ?? 1;
+      }
+    } catch (error) {
+      console.error("Error parsing auth data:", error);
     }
-    return null; // or any default value you prefer
+    return null;
   });
-  // console.log(useSelector((state)=>state.auth.data))
 
   useEffect(() => {
-    (async()=>{
-      if (docId) {
-        dispatch(getPatient(docId));
-      }
-    })();
-    
-  }, []);
+    if (docId !== null) {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          await dispatch(getPatient(docId));
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching patient data:", error);
+          toast.error("Error fetching patient data");
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }
+  }, [dispatch, docId]);
 
-  const { patients } =  useSelector((state) => state?.patient);
-  // console.log(patients)
+  const { patients } = useSelector((state) => state?.patient);
+
+  useEffect(() => {
+    // Filter patients based on search text
+    const filtered = patients.filter((patient) =>
+      patient.fullName.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredPatients(filtered);
+  }, [patients, searchText]);
 
   const handleSearch = () => {
-    // Implement search functionality here
+    // Search functionality is handled by useEffect above
   };
 
   return (
     <Layout>
+      {/* Loading indicator */}
+      {loading && <div className="loading-toast"></div>}
+      
+      {/* Search bar */}
       <div className="w-full flex justify-center">
         <div className="w-full flex flex-col justify-around items-center gap-5 mx-5">
           <h1 className="font-sans font-semibold text-4xl text-[#A09E93] mt-6">
@@ -66,14 +89,15 @@ const PatientList = () => {
                 </button>
               </div>
             </div>
+            {/* Patient list */}
             <div className="w-full flex justify-around items-center font-semibold font-sans">
               <p className="text-sky-500">Patient Name</p>
               <p className="text-sky-500">Gender</p>
               <p className="text-sky-500">Age</p>
               <p className="text-sky-500">Mobile Number</p>
             </div>
-            {patients && patients.length > 0 ? (
-              patients.map((patient) => (
+            {filteredPatients && filteredPatients.length > 0 ? (
+              filteredPatients.map((patient) => (
                 <div
                   key={patient._id}
                   className="w-[95%] flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4"
@@ -96,5 +120,6 @@ const PatientList = () => {
     </Layout>
   );
 };
+
 
 export default PatientList;

@@ -123,24 +123,22 @@ export const createAccount = createAsyncThunk('auth/signup', async (data) => {
   });
 
 
-  export const logout=createAsyncThunk('auth/logout',async(data)=>{
-    try{
-      const promise=axiosInstance.post('user/logout', data, {
-        headers: {
-          'Content-Type': 'application/json'
-        }});
-
-        const res=await toast.promise(promise,{
-          success:(data)=>{
-            return data?.data?.message; 
-          }
-        });
-        return res.data;
-    }catch(error){
-      toast.error(error.message);
+  export const logout = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
+    try {
+      // Make the logout request to the server
+      const response = await axiosInstance.post('user/logout');
+      // Clear localStorage
+      localStorage.clear();
+      // Display success toast
+      toast.success("Logout successful");
+      return response.data; // Return data if needed
+    } catch (error) {
+      // Display error toast
+      toast.error("Failed to logout");
+      // Handle errors
       throw error;
     }
-  })
+  });
   
 const authSlice = createSlice({
   name: 'auth',
@@ -175,4 +173,5 @@ const authSlice = createSlice({
 });
 
 // export const {}=authSlice.actions;
+export const {} = authSlice.actions;
 export default authSlice.reducer;
