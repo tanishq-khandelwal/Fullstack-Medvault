@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPatient } from "../../Redux/patientListSlice";
 import { toast } from 'react-hot-toast'; // Import toast
 
+
+
 const PatientList = () => {
   const dispatch = useDispatch();
 
@@ -11,18 +13,8 @@ const PatientList = () => {
   const [loading, setLoading] = useState(true);
   const [filteredPatients, setFilteredPatients] = useState([]);
 
-  const docId = useSelector((state) => {
-    const data = state?.auth?.data;
-    try {
-      if (data) {
-        const parsedData = JSON.parse(data);
-        return parsedData?._id ?? 1;
-      }
-    } catch (error) {
-      console.error("Error parsing auth data:", error);
-    }
-    return null;
-  });
+
+  const docId = localStorage.getItem('id').toString();
 
   useEffect(() => {
     if (docId !== null) {
