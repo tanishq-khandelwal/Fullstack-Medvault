@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getPatient } from "../Redux/patientListSlice";
+import CountingAnimation from "./countingAnimation";
 
 const Dashboard = () => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
   const { patients } = useSelector((state) => state.patient);
   const [searchText, setSearchText] = useState("");
-  const docId = localStorage.getItem('id').toString();
+  const docId = localStorage.getItem("id").toString();
   // if (idItem) {
   // const docId = idItem.toString();
   // console.log(docId);
-  // } 
-
+  // }
 
   useEffect(() => {
     if (docId) {
@@ -21,9 +22,14 @@ const Dashboard = () => {
     }
   }, [dispatch, docId]);
   // Filter patients based on search text
-  const filteredPatients = patients.filter((patient) =>
-    patient.fullName.toLowerCase().includes(searchText.toLowerCase())
-  );
+  // const patients = patients.filter((patient) =>
+  //   patient.fullName.toLowerCase().includes(searchText.toLowerCase())
+  // );
+
+  const handleViewDetails = () => {
+    const firstPatient = patients.length > 0 ? patients[0] : null;
+    navigate("/patient/healthDetails", { state: firstPatient });
+  };
 
   return (
     <Layout>
@@ -31,26 +37,26 @@ const Dashboard = () => {
         <div className="w-full flex justify-center mt-10">
           <div className="w-full flex flex-col justify-around items-center gap-5 mx-5">
             <div className="w-full flex justify-around items-center">
-              <div className="p-10 flex flex-col justify-center items-center bg-slate-200 rounded-3xl">
+              <div className="p-10 flex flex-col justify-center items-center bg-slate-200 rounded-3xl border border-[#82818166] shadow-xl">
                 <>
                   <h1 className="font-bold text-[24px]">
-                    {filteredPatients.length > 0
-                      ? filteredPatients[0].fullName
+                    {patients.length > 0
+                      ? patients[0].fullName
                       : "No Patient Found"}
                   </h1>
                   <div className="flex justify-center items-center gap-10 mt-3">
-                    <div className="w-[100px] flex flex-col justify-center items-center bg-blue-500 text-white p-1 rounded-xl">
+                    <div className="w-[100px] flex flex-col justify-center items-center bg-blue-500 text-white p-1 rounded-xl ">
                       <h1>Age</h1>
                       <p>
-                        {filteredPatients.length > 0
-                          ? filteredPatients[0].age
+                        {patients.length > 0
+                          ? patients[0].age
                           : "-"}
                       </p>
                     </div>
                     <div className="w-[100px] flex flex-col justify-center items-center bg-blue-500 text-white p-1 rounded-xl h-14">
                       <p>
-                        {filteredPatients.length > 0
-                          ? filteredPatients[0].gender
+                        {patients.length > 0
+                          ? patients[0].gender
                           : "-"}
                       </p>
                     </div>
@@ -59,18 +65,23 @@ const Dashboard = () => {
                   <div className="flex justify-center items-center mt-4">
                     <button
                       type="button"
-                      className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center"
-                      onClick={() => {}}
+                      className="text-white bg-blue-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center transform transition-transform hover:scale-110"
+                      onClick={handleViewDetails
+                      }
                     >
-                      <Link to={"/patient-details"}>View</Link>
+                      <p>View</p>
                     </button>
                   </div>
                 </>
               </div>
-              <div className="p-10 flex flex-col justify-center items-center bg-slate-200 rounded-3xl">
+              <div className="p-10 flex flex-col justify-center items-center bg-slate-200 rounded-3xl border border-[#82818166] shadow-xl">
                 <h1 className="font-bold text-[24px]">Today Patient Count</h1>
-                <h1 className="font-bold text-[36px] text-sky-500">{filteredPatients.length}</h1>
+                <h1 className="font-bold text-[36px] text-sky-500">
+                  {patients.length}
+                </h1>
               </div>
+
+              <CountingAnimation totalCount={patients.length} />
             </div>
             <div className="w-full flex flex-col justify-center items-center gap-5">
               <div className="w-full flex justify-around items-center gap-3">
@@ -88,9 +99,9 @@ const Dashboard = () => {
                 <div>
                   <button
                     type="button"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center"
+                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center"
                   >
-                    Search
+                    Refresh
                   </button>
                 </div>
               </div>
@@ -100,13 +111,15 @@ const Dashboard = () => {
                 <p className="text-sky-500">Age</p>
                 <p className="text-sky-500">Mobile Number</p>
               </div>
-              {filteredPatients.length > 0 ? (
-                filteredPatients.map((patient) => (
+              {patients.length > 0 ? (
+                patients.map((patient) => (
                   <div
                     key={patient._id}
                     className="w-full flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4"
                   >
-                    <p>{patient.fullName}</p>
+                    <div className="w-[4rem] flex">
+                      <p>{patient.fullName}</p>
+                    </div>
                     <p>{patient.gender}</p>
                     <p>{patient.age}</p>
                     <p>{patient.phone}</p>
@@ -119,7 +132,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Layout>
   );
 };
