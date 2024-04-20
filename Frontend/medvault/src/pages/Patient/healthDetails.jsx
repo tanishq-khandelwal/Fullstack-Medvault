@@ -6,16 +6,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import Layout from "../../layout/Layout";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { HealthDetails } from "../../Redux/patientListSlice";
 
 const PatientDetails = () => {
   const navigate = useNavigate();
+  const dispatch=useDispatch();
   const location = useLocation();
   const patient = location.state;
 
   const doctor=localStorage.getItem('data');
   const doc=JSON.parse(doctor);
 
-  const [formData, setFormData] = useState({
+  const [HealthData, setHealthData] = useState({
     BP: "",
     sugar: "",
     symptoms: "",
@@ -26,19 +29,48 @@ const PatientDetails = () => {
     appointmentDate: new Date(),
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
-      BP: formData.BP,
-      sugar: formData.sugar,
-      symptoms: formData.symptoms,
-      diagnosis: formData.diagnosis,
-      notes: formData.notes,
-      docid: user.id,
-      patintId: patient._id,
-      appointmentDate: formData.appointmentDate,
-    };
+
+  const handleUserInput = (event) => {
+    const { name, value } = event.target;
+    setHealthData({
+      ...HealthData,
+      [name]: value,
+    });
   };
+
+  const saveHealthDetail=async(event)=>{
+
+    event.preventDefault();
+
+    const formData=new FormData();
+    formData.append("BP",HealthData.BP);
+    formData.append("sugar",HealthData.sugar);
+    formData.append("symptoms",HealthData.symptoms);
+    formData.append("diagnosis",HealthData.diagnosis);
+    formData.append("notes",HealthData.notes);
+    formData.append("docid",doc._id);
+    formData.append("patientid",patient._id);
+    formData.append("appointmentDate",HealthData.appointmentDate);
+
+
+    console.log(formData);
+
+    const response=await dispatch(HealthDetails(formData));
+    if(response.payload?.success){
+      navigate("/patient/prescription")
+    }
+
+
+    setHealthData({
+    BP: "",
+    sugar: "",
+    symptoms: "",
+    diagnosis: "",
+    notes: "",
+    appointmentDate: new Date(),
+    })
+  }
+
 
   return (
     <Layout>
@@ -105,7 +137,7 @@ const PatientDetails = () => {
             </h1>
             <form
               className="w-full space-y-4 md:space-y-6"
-              onSubmit={handleSubmit}
+              onSubmit={saveHealthDetail}
             >
               <div className="flex gap-8">
                 <div>
@@ -119,10 +151,8 @@ const PatientDetails = () => {
                     type="text"
                     name="BP"
                     id="BP"
-                    value={formData.BP}
-                    onChange={(e) =>
-                      setFormData({ ...formData, BP: e.target.value })
-                    }
+                    value={HealthData.BP}
+                    onChange={handleUserInput}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                     placeholder="Enter BP (mmHg)"
                   />
@@ -138,10 +168,8 @@ const PatientDetails = () => {
                     type="text"
                     name="sugar"
                     id="sugar"
-                    value={formData.sugar}
-                    onChange={(e) =>
-                      setFormData({ ...formData, sugar: e.target.value })
-                    }
+                    value={HealthData.sugar}
+                    onChange={handleUserInput}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                     placeholder="Enter sugar (mmol/L)"
                   />
@@ -158,10 +186,8 @@ const PatientDetails = () => {
                   type="text"
                   name="symptoms"
                   id="symptoms"
-                  value={formData.symptoms}
-                  onChange={(e) =>
-                    setFormData({ ...formData, symptoms: e.target.value })
-                  }
+                  value={HealthData.symptoms}
+                  onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter symptoms"
                 />
@@ -178,10 +204,8 @@ const PatientDetails = () => {
                   type="text"
                   name="diagnosis"
                   id="diagnosis"
-                  value={formData.diagnosis}
-                  onChange={(e) =>
-                    setFormData({ ...formData, diagnosis: e.target.value })
-                  }
+                  value={HealthData.diagnosis}
+                  onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter Diagnosis"
                 />
@@ -198,10 +222,8 @@ const PatientDetails = () => {
                   type="text"
                   name="notes"
                   id="notes"
-                  value={formData.notes}
-                  onChange={(e) =>
-                    setFormData({ ...formData, notes: e.target.value })
-                  }
+                  value={HealthData.notes}
+                  onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter Additional Notes"
                 />
@@ -216,9 +238,7 @@ const PatientDetails = () => {
                 </label>
                 <DatePicker
                 //   selected={formData.appointmentDate}
-                  onChange={(date) =>
-                    setFormData({ ...formData, appointmentDate: date })
-                  }
+                onChange={handleUserInput}
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={15}

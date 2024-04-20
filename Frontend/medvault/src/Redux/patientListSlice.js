@@ -32,6 +32,24 @@ export const getPatient = createAsyncThunk("patient/patientList",async(data)=>{
 }
 );
 
+
+export const HealthDetails=createAsyncThunk("patient/HealthDetails",async(data)=>{
+  try{
+    const promise=await axiosInstance.post('patient/healthDetails',data,{
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    });
+
+
+    toast.success("Redirecting to Prescription Page.....");
+    return promise.data;
+  }catch(error){
+    toast.error("An Error Occured")
+  }
+})
+
+
 const patientSlice = createSlice({
   name: "patient",
   initialState,
@@ -53,6 +71,8 @@ const patientSlice = createSlice({
       });
   },
 });
+
+
 
 
 export const{}=patientSlice.actions;
