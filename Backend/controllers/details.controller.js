@@ -43,7 +43,7 @@ export const HealthDetails=async(req,res,next)=>{
 }
 
 export const getPatientList = async (req, res, next) => {
-    const  {docid}  = req.params;
+    const { docid } = req.params;
     console.log(docid);
 
     try {
@@ -55,10 +55,13 @@ export const getPatientList = async (req, res, next) => {
         }
 
         // Find all patients associated with the doctor
-        const patients = await Patient.find({ docid:docid });
+        const patients = await Patient.find({ docid: docid });
+
+        // Reverse the order of the patients array to sort it in descending order
+        const sortedPatients = patients.reverse();
 
         // Populate health details for each patient
-        const populatedPatients = await Promise.all(patients.map(async patient => {
+        const populatedPatients = await Promise.all(sortedPatients.map(async patient => {
             const patientWithDetails = { ...patient.toJSON() };
             const healthDetails = await HDetails.find({ patientid: patient._id });
             patientWithDetails.healthDetails = healthDetails;

@@ -57,7 +57,7 @@ const PatientDetails = () => {
 
     const response=await dispatch(HealthDetails(formData));
     if(response.payload?.success){
-      navigate("/patient/prescription")
+      navigate("/patient/prescription",{state:patient});
     }
 
 

@@ -46,8 +46,8 @@ export const contactUs = async (req, res, next) => {
     }
 
     
-    const generatePDF= `https://medvault-mt5q.onrender.com/api/v1/pdf/invoice/${patientId}`
-    const submitDocuments=`https://medvault-mt5q.onrender.com/api/v1/patient/form/${patientId}`
+    const generatePDF= `https://fullstack-medvault.onrender.com/api/v1/pdf/invoice/${patientId}`
+    const submitDocuments=`https://fullstack-medvault.onrender.com/api/v1/patient/form/${patientId}`
 
     // const generatePDF= `http://localhost:3000/api/v1/pdf/invoice/${patientId}`
     // const submitDocuments=`http://localhost:3000/api/v1/patient/form/${patientId}`

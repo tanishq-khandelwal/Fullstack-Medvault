@@ -16,6 +16,7 @@ import NotFound from "./pages/notFound.jsx";
 import NotRequireAuth from "./pages/Auth/notRequireAuth.jsx";
 import RequireAuth from "./pages/Auth/requireAuth.jsx";
 import AccessDenied from "./pages/denied.jsx";
+import PrescriptionForm from "./pages/Patient/prescription.jsx";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/denied" element={<AccessDenied />} />
+        <Route path="/contact" element={<Contact />} />
+
 
         <Route element={<NotRequireAuth />}>
           <Route path="/login" element={<Login />} />
@@ -32,11 +35,10 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["RECEPTIONIST"]} />}>
 
         </Route>
-
+        <Route path="/patient/prescription" element={<PrescriptionForm />} />
         <Route element={<RequireAuth allowedRoles={["DOCTOR"]} />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/patientList" element={<PatientList />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/patient/healthDetails" element={<PatientDetails />} />
         </Route>

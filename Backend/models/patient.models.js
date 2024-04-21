@@ -43,6 +43,8 @@ const patientSchema = new Schema({
     required: [true, "docid is required"],
   },
   
+},{
+  timestamps:true,
 });
 
 const Patient = model("Patient", patientSchema);
