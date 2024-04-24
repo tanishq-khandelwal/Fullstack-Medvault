@@ -26,7 +26,7 @@ const PatientDetails = () => {
     notes: "",
     docid: "",
     patientid: "",
-    appointmentDate: new Date(),
+    appointmentDate: "",
   });
 
 
@@ -67,7 +67,7 @@ const PatientDetails = () => {
     symptoms: "",
     diagnosis: "",
     notes: "",
-    appointmentDate: new Date(),
+    appointmentDate: "",
     })
   }
 

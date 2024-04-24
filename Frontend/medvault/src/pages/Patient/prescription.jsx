@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addPrescription, sendMail } from "../../Redux/patientListSlice";
+import toast from "react-hot-toast";
 
 
 // Define the PrescriptionForm component
@@ -47,8 +48,11 @@ const PrescriptionForm = () => {
         };
         await dispatch(addPrescription(data));
       }
+      const loading=toast.loading("Loading");
+
       const res = await dispatch(sendMail(patientId));
       if (res) {
+        toast.dismiss(loading);
         navigate("/dashboard");
       }
     } catch (error) {

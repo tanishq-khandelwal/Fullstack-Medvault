@@ -15,6 +15,23 @@ const Dashboard = () => {
   // const docId = idItem.toString();
   // console.log(docId);
   // }
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Queue':
+        return 'text-red-500'; // Red color for 'queue'
+      case 'Done':
+        return 'text-green-500'; // Green color for 'done'
+      case 'Next':
+        return 'text-blue-500'; // Blue color for 'next'
+      default:
+        return ''; // Default color if status is not recognized
+    }
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
+  
 
   useEffect(() => {
     if (docId) {
@@ -99,7 +116,7 @@ const Dashboard = () => {
                 <div>
                   <button
                     type="button"
-                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center"
+                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center" onClick={refreshPage}
                   >
                     Refresh
                   </button>
@@ -110,6 +127,7 @@ const Dashboard = () => {
                 <p className="text-sky-500">Gender</p>
                 <p className="text-sky-500">Age</p>
                 <p className="text-sky-500">Mobile Number</p>
+                <p className="text-sky-500">Status</p>
               </div>
               {patients.length > 0 ? (
                 patients.map((patient) => (
@@ -118,11 +136,15 @@ const Dashboard = () => {
                     className="w-full flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4"
                   >
                     <div className="w-[10rem] ">
-                    <p className="pr-2">{patient.fullName}</p>
+                    <p className="pl-5">{patient.fullName}</p>
                   </div>
                   <p className="flex justify-center text-center w-[10rem]">{patient.gender}</p>
                   <p className="flex justify-center text-center w-[10rem]">{patient.age}</p>
                   <p className="flex justify-center text-center w-[10rem]">{patient.phone}</p>
+                  <p className={`flex justify-center text-center w-[10rem] pl-4 ${getStatusColor(patient.status)}`}>
+  {patient.status}
+</p>
+
                   </div>
                 ))
               ) : (

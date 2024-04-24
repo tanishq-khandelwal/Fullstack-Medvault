@@ -42,6 +42,11 @@ const patientSchema = new Schema({
     type: String,
     required: [true, "docid is required"],
   },
+  status: {
+  type: String,
+  enum: ["Next", "Done","Queue"],
+  default: "Queue",
+}
   
 },{
   timestamps:true,
