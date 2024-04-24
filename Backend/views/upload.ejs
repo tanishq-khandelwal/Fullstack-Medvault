@@ -274,9 +274,9 @@
 
       async function fetchAndRenderDocuments() {
         try {
-          // const response = await fetch('http://localhost:3000/api/v1/patient/allDocuments/<%= id %>');
+           // const response = await fetch('http://localhost:3000/api/v1/patient/allDocuments/<%= id %>');
           const response = await fetch(
-            "https:/fullstack-medvault.onrender.com/api/v1/patient/allDocuments/<%= id %>"
+            "/api/v1/patient/allDocuments/<%= id %>"
           );
           const data = await response.json();
 
