@@ -21,6 +21,24 @@ export const getDoctors=createAsyncThunk("reception/doctorList",async(data)=>{
     };
 })
 
+export const addPatient=createAsyncThunk("reception/patientInfo",async(data)=>{
+    try{
+        const promise=await axiosInstance.post('/patient/addPatient', data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const loadingToast=toast.loading("Loading Data");
+          loadingToast;
+          const res=await promise;
+          toast.dismiss(loadingToast);
+          toast.success("Patient Registered")
+          return res.data;
+    }catch(Error){
+        toast.error("An Error Occured");
+    }
+})
+
 
 
 const receptionSlice=createSlice({

@@ -1,15 +1,67 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../layout/Layout";
 import ProfileImage from "../../assets/ProfileImage.svg";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { addPatient } from "../../Redux/receptionSlice";
 
 const AddPatient = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const doctor = location.state;
   console.log(doctor);
+
+  const [patientData, setPatientData] = useState({
+    fullName: "",
+    email: "",
+    age: "",
+    address: "",
+    docid: doctor._id,
+    medication:"",
+    gender: "",
+    phone: "",
+  });
+
+  const handleUserInput = (event) => {
+    const { name, value } = event.target;
+    setPatientData({
+      ...patientData,
+      [name]: value,
+    });
+  };
+
+  const savePatientDetail = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("fullName", patientData.fullName);
+    formData.append("email", patientData.email);
+    formData.append("age", patientData.age);
+    formData.append("address", patientData.address);
+    formData.append("docid", patientData.docid);
+    formData.append("gender", patientData.gender);
+    formData.append("phone", patientData.phone);
+    formData.append("medication",patientData.medication)
+
+    const response = await dispatch(addPatient(formData));
+    if (response.payload.success) {
+      navigate("/doctorList");
+    }
+
+    setPatientData({
+      fullName: "",
+      email: "",
+      age: "",
+      address: "",
+      docid: doctor._id,
+      gender: "",
+      phone: "",
+      medication:""
+    });
+  };
 
   return (
     <Layout>
@@ -54,7 +106,7 @@ const AddPatient = () => {
             </h1>
             <form
               className="w-full space-y-4 md:space-y-6"
-              //   onSubmit={saveHealthDetail}
+               onSubmit={savePatientDetail}
             >
               <div>
                 <label
@@ -65,10 +117,10 @@ const AddPatient = () => {
                 </label>
                 <input
                   type="text"
-                  name="symptoms"
+                  name="fullName"
                   id="symptoms"
-                  //   value={HealthData.symptoms}
-                  //   onChange={handleUserInput}
+                    value={patientData.fullName}
+                    onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter Full Name"
                 />
@@ -83,10 +135,10 @@ const AddPatient = () => {
                   </label>
                   <input
                     type="number"
-                    name="BP"
+                    name="phone"
                     id="BP"
-                    // value={HealthData.BP}
-                    // onChange={handleUserInput}
+                    value={patientData.phone}
+                    onChange={handleUserInput}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-[150%] p-2.5"
                     placeholder="Enter Mobile No."
                   />
@@ -102,8 +154,8 @@ const AddPatient = () => {
                     type="number"
                     name="age"
                     id="age"
-                    // value={HealthData.sugar}
-                    // onChange={handleUserInput}
+                    value={patientData.age}
+                    onChange={handleUserInput}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600  w-[50%] p-2.5 ml-20"
                     placeholder="Enter Age"
                   />
@@ -121,9 +173,9 @@ const AddPatient = () => {
                       <input
                         type="radio"
                         name="gender"
-                        id="gender"
-                        // value={HealthData.sugar}
-                        // onChange={handleUserInput}
+                        id="Male"
+                        value="male"
+                        onChange={handleUserInput}
                         className="w-full"
                       />
                       <label className="">Male</label>
@@ -133,9 +185,9 @@ const AddPatient = () => {
                       <input
                         type="radio"
                         name="gender"
-                        id="gender"
-                        // value={HealthData.sugar}
-                        // onChange={handleUserInput}
+                        id="Female"
+                        value="female"
+                        onChange={handleUserInput}
                         className="w-full"
                       />
                       <label className="">Female</label>
@@ -145,9 +197,9 @@ const AddPatient = () => {
                       <input
                         type="radio"
                         name="gender"
-                        id="gender"
-                        // value={HealthData.sugar}
-                        // onChange={handleUserInput}
+                        id="Other"
+                        value="other"
+                        onChange={handleUserInput}
                         className="w-full"
                       />
                       <label className="">Other</label>
@@ -168,8 +220,8 @@ const AddPatient = () => {
                   type="text"
                   name="email"
                   id="email"
-                  //   value={HealthData.diagnosis}
-                  //   onChange={handleUserInput}
+                    value={patientData.email}
+                    onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter Email id"
                 />
@@ -186,8 +238,8 @@ const AddPatient = () => {
                   type="text"
                   name="address"
                   id="address"
-                  //   value={HealthData.notes}
-                  //   onChange={handleUserInput}
+                    value={patientData.address}
+                    onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter Current Address"
                 />
@@ -204,8 +256,8 @@ const AddPatient = () => {
                   type="text"
                   name="medication"
                   id="medication"
-                  //   value={HealthData.notes}
-                  //   onChange={handleUserInput}
+                    value={patientData.medication}
+                    onChange={handleUserInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   placeholder="Enter Any Medication"
                 />
