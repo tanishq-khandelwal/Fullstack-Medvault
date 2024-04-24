@@ -14,9 +14,10 @@ export const getPatient = createAsyncThunk(
     try {
       const promise = await axiosInstance.post(`patient/patientList/${data}`);
       const loadingToast = toast.loading("Loading Patient List");
+      loadingToast;
       const res = await promise;
       toast.dismiss(loadingToast);
-      toast.success(res.data.message);
+      // toast.success(res.data.message);
       return res.data.patients;
     } catch (error) {
       toast.error("An Error Occurred");

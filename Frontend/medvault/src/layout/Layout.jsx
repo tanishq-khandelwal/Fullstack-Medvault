@@ -62,20 +62,42 @@ const Layout = ({ children }) => {
               <Link to={"/"}>Home</Link>
             </li>
 
+            {/* Doctor Routes */}
             {isLoggedIn && role === "DOCTOR" && (
               <li>
                 <Link to={"/dashboard"}>Dashboard</Link>
               </li>
             )}
 
-{isLoggedIn && role === "DOCTOR" && (
-  <li>
-    <button onClick={() => navigate("/patientList")}>Patient List</button>
-  </li>
-)}
+            {isLoggedIn && role === "DOCTOR" && (
+              <li>
+                <button onClick={() => navigate("/patientList")}>
+                  Patient List
+                </button>
+              </li>
+            )}
 
-            
+            {/* Doctor Rotes End */}
 
+            {/* Receptionist Routes Start */}
+
+            {isLoggedIn && role === "RECEPTIONIST" && (
+              <li>
+                <button onClick={() => navigate("/doctorList")}>
+                  Add Patient
+                </button>
+              </li>
+            )}
+
+            {isLoggedIn && role === "RECEPTIONIST" && (
+              <li>
+                <button onClick={() => navigate("/appointmentList")}>
+                  Patient List
+                </button>
+              </li>
+            )}
+
+            {/* Receptionist Routes End */}
             <li>
               <Link to={"/contact"}>Contact</Link>
             </li>

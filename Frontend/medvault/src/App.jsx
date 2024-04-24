@@ -17,6 +17,8 @@ import NotRequireAuth from "./pages/Auth/notRequireAuth.jsx";
 import RequireAuth from "./pages/Auth/requireAuth.jsx";
 import AccessDenied from "./pages/denied.jsx";
 import PrescriptionForm from "./pages/Patient/prescription.jsx";
+import DoctorList from "./pages/Receptionist/doctorList.jsx";
+import AddPatient from "./pages/Receptionist/addPatient.jsx";
 
 function App() {
   return (
@@ -33,6 +35,10 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["RECEPTIONIST"]} />}>
+          <Route path="/doctorList" element={<DoctorList/>}/>
+          <Route path="/patientInfo" element={<AddPatient/>}/>
+
+
 
         </Route>
         <Route path="/patient/prescription" element={<PrescriptionForm />} />

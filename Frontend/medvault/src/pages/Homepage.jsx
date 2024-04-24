@@ -17,12 +17,12 @@ const HomePage = () => {
         <div className="w-full flex flex-col lg:flex-row justify-between items-center lg:items-start">
           <div className="w-full lg:w-[50%] flex flex-col justify-start items-center lg:items-start">
             <div className="flex items-center mt-[5rem]">
-              <img
+              {/* <img
                 src={Logo}
                 alt="Logo"
                 className="h-10 w-10 lg:h-12 lg:w-12"
-              />
-              <h1 className="font-bold text-lg lg:text-2xl text-center lg:text-left ml-2 lg:ml-3">
+              /> */}
+              <h1 className="font-bold text-lg lg:text-3xl text-center lg:text-left ">
                 <span className="text-blue-600">Med</span>Vault
               </h1>
             </div>

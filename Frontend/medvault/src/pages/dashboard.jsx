@@ -117,12 +117,12 @@ const Dashboard = () => {
                     key={patient._id}
                     className="w-full flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4"
                   >
-                    <div className="w-[4rem] flex">
-                      <p>{patient.fullName}</p>
-                    </div>
-                    <p>{patient.gender}</p>
-                    <p>{patient.age}</p>
-                    <p>{patient.phone}</p>
+                    <div className="w-[10rem] ">
+                    <p className="pr-2">{patient.fullName}</p>
+                  </div>
+                  <p className="flex justify-center text-center w-[10rem]">{patient.gender}</p>
+                  <p className="flex justify-center text-center w-[10rem]">{patient.age}</p>
+                  <p className="flex justify-center text-center w-[10rem]">{patient.phone}</p>
                   </div>
                 ))
               ) : (

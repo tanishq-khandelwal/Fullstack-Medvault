@@ -90,17 +90,17 @@ const PatientList = () => {
             </div>
             {filteredPatients && filteredPatients.length > 0 ? (
               filteredPatients.map((patient) => (
-                <div
+                <button
                   key={patient._id}
-                  className="w-[95%] flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4"
+                  className="w-[95%] flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4 hover:border hover:border-[#3392e666] shadow"
                 >
-                  <div className="w-[4rem] flex">
-                    <p>{patient.fullName}</p>
+                  <div className="w-[10rem] ">
+                    <p className="pr-2">{patient.fullName}</p>
                   </div>
-                  <p>{patient.gender}</p>
-                  <p>{patient.age}</p>
-                  <p>{patient.phone}</p>
-                </div>
+                  <p className="flex justify-center text-center w-[10rem]">{patient.gender}</p>
+                  <p className="flex justify-center text-center w-[10rem]">{patient.age}</p>
+                  <p className="flex justify-center text-center w-[10rem]">{patient.phone}</p>
+                </button>
               ))
             ) : (
               <p>No Patient Found</p>

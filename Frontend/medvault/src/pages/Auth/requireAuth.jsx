@@ -11,8 +11,8 @@ const RequireAuth = ({ allowedRoles }) => {
   ) : isLoggedIn ? (
     <Navigate to={"/denied"} state={{ from: location }} replace />
   ) : (
-    toast.error("Please Login to Continue...."),
-    <Navigate to={"/login"} state={{ from: location }} replace />
+    // toast.error("Please Login to Continue...."),
+     <Navigate to={"/login"} state={{ from: location }} replace />
   );
 };
 
