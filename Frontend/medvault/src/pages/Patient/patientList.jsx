@@ -3,11 +3,13 @@ import Layout from "../../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getPatient } from "../../Redux/patientListSlice";
 import { toast } from 'react-hot-toast'; // Import toast
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
 const PatientList = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(true);
@@ -93,6 +95,7 @@ const PatientList = () => {
                 <button
                   key={patient._id}
                   className="w-[95%] flex justify-around items-center bg-blue-100 p-3 rounded-xl gap-4 hover:border hover:border-[#3392e666] shadow"
+                  onClick={()=>navigate('/patient/documents',{state:patient})}
                 >
                   <div className="w-[10rem] ">
                     <p className="pr-2">{patient.fullName}</p>

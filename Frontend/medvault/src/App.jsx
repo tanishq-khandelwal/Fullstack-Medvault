@@ -19,6 +19,7 @@ import AccessDenied from "./pages/denied.jsx";
 import PrescriptionForm from "./pages/Patient/prescription.jsx";
 import DoctorList from "./pages/Receptionist/doctorList.jsx";
 import AddPatient from "./pages/Receptionist/addPatient.jsx";
+import PatientDocuments from "./pages/Patient/patientDocuments.jsx";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/patientList" element={<PatientList />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/patient/healthDetails" element={<PatientDetails />} />
+          <Route path="/patient/documents" element={<PatientDocuments />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

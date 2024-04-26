@@ -5,6 +5,7 @@ import { PiThermometer } from "react-icons/pi";
 
 const initialState = {
   patients: [],
+  documents:[],
   error: null,
 };
 
@@ -71,6 +72,21 @@ export const sendMail=createAsyncThunk("patient/sendMail",async(data)=>{
   }
 })
 
+
+export const getDocuments = createAsyncThunk("patient/documents", async (data) => {
+  try {
+    const promise = await axiosInstance.get(`patient/allDocuments/${data}`);
+    const loading = toast.loading("Loading");
+    toast.dismiss(loading); // Dismiss loading toast regardless of promise data existence
+    toast.success("Documents fetched successfully");
+    return promise.data;
+  } catch (error) {
+    toast.error("No Documents Available");
+    throw error; // Rethrow the error to handle it in the component
+  }
+});
+
+
 const patientSlice = createSlice({
   name: "patient",
   initialState,
@@ -82,10 +98,17 @@ const patientSlice = createSlice({
         state.error = null; // Reset error state on success
       })
 
+      .addCase(getDocuments.fulfilled,(state,action)=>{
+        state.documents=action.payload;
+      })
+
       .addCase(getPatient.rejected, (state, action) => {
         state.error = action.payload;
         // console.error("Error:", Error);
-      });
+      })
+
+
+      
   },
 });
 
